@@ -11,13 +11,20 @@
 
 // functions
 NSString *format(iTunesTrack *track) {
-  return [NSString stringWithFormat: @"%@ %@ %@ %@ %@ %@", 
-          track.databaseID,
-          track.name,
-          track.album,
-          track.artist,
-          track.year,
-          track.genre];
+
+  NSString *name = track.name;
+  NSString *album = track.album;
+  NSString *databaseID = track.databaseID;
+  NSString *artist = track.artist;
+  NSString *year = track.year;
+  NSString *genre = track.genre;
+  return [NSString stringWithFormat: @"%d %@ %@ %@ (%d) %@ \n", 
+          databaseID,
+          name,
+          album,
+          artist,
+          year,
+          genre];
           
 }
 
@@ -26,24 +33,9 @@ static iTunesPlaylist *music;
 void search(NSString *query) {
     SBElementArray *tracks = [music searchFor:query only:iTunesESrAAll];
     NSLog(@"%@", [tracks class]);    
-    NSMutableArray *container = [NSMutableArray array];
     for (iTunesTrack *track in tracks) {
-      //printf("%s\n", [format(track) cStringUsingEncoding: NSUTF8StringEncoding]);
-
-      /*
-        NSString *r =  [NSString stringWithFormat: @"%@ %@ %@ %@ %@ %@", 
-                track.databaseID,
-                track.name,
-                track.album,
-                track.artist,
-                track.year,
-                track.genre];
-                */
-      printf("%s\n", [[track name] cStringUsingEncoding: NSUTF8StringEncoding]);
-[container addObject:[track genre]];
+      printf("%s\n", [format(track) cStringUsingEncoding: NSUTF8StringEncoding]);
     }
-    NSLog(@"%@", container);
-
 }
 
 int main (int argc, const char * argv[])
