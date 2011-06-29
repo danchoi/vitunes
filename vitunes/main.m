@@ -21,22 +21,6 @@ NSString *format(iTunesTrack *track) {
           
 }
 
-@interface iTunesTrack (Vitunes) 
-  - (NSString *)textInfo;
-@end
-
-@implementation iTunesTrack (Vitunes) 
-- (NSString *)textInfo {
-    return [NSString stringWithFormat: @"%@ %@ %@ %@ %@ %@", 
-            self.databaseID,
-            self.name,
-            self.album,
-            self.artist,
-            self.year,
-            self.genre];
-}
-@end
-
 int main (int argc, const char * argv[])
 {
 
