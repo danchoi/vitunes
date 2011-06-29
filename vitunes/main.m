@@ -21,8 +21,34 @@ NSString *format(iTunesTrack *track) {
           
 }
 
+static iTunesPlaylist *music;
+
+void search(NSString *query) {
+    SBElementArray *tracks = [music searchFor:query only:iTunesESrAAll];
+    NSLog(@"%@", [tracks class]);    
+    NSMutableArray *container = [NSMutableArray array];
+    for (iTunesTrack *track in tracks) {
+      //printf("%s\n", [format(track) cStringUsingEncoding: NSUTF8StringEncoding]);
+
+      /*
+        NSString *r =  [NSString stringWithFormat: @"%@ %@ %@ %@ %@ %@", 
+                track.databaseID,
+                track.name,
+                track.album,
+                track.artist,
+                track.year,
+                track.genre];
+                */
+      printf("%s\n", [[track name] cStringUsingEncoding: NSUTF8StringEncoding]);
+[container addObject:[track genre]];
+    }
+    NSLog(@"%@", container);
+
+}
+
 int main (int argc, const char * argv[])
 {
+
 
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 
@@ -38,13 +64,8 @@ int main (int argc, const char * argv[])
     
     iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
     iTunesSource *library = [[iTunes sources] objectWithName:@"Library"];
-    iTunesPlaylist *music = [[library playlists] objectWithName:@"Music"];
-    SBElementArray *tracks = [music searchFor:query only:iTunesESrAAll];
-    NSLog(@"%@", [tracks class]);    
-    NSArray *trackStrings = [tracks arrayByApplyingSelector:@selector(name)];
-    
-    NSLog(@"%@", trackStrings);
-
+    music = [[library playlists] objectWithName:@"Music"];
+    search(query);
 
 
     [pool drain];
