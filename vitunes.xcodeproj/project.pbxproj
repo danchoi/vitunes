@@ -1,0 +1,233 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DEEABA4D13BBE0490092C12B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEEABA4C13BBE0490092C12B /* Foundation.framework */; };
+		DEEABA5013BBE0490092C12B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DEEABA4F13BBE0490092C12B /* main.m */; };
+		DEEABA5A13BBE0A50092C12B /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEEABA5913BBE0A50092C12B /* ScriptingBridge.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DEEABA4613BBE0490092C12B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		DEEABA4813BBE0490092C12B /* vitunes */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = vitunes; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEEABA4C13BBE0490092C12B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DEEABA4F13BBE0490092C12B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DEEABA5213BBE0490092C12B /* vitunes-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "vitunes-Prefix.pch"; sourceTree = "<group>"; };
+		DEEABA5313BBE0490092C12B /* vitunes.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = vitunes.1; sourceTree = "<group>"; };
+		DEEABA5913BBE0A50092C12B /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
+		DEEABA5B13BBE0C20092C12B /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DEEABA4513BBE0490092C12B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEEABA5A13BBE0A50092C12B /* ScriptingBridge.framework in Frameworks */,
+				DEEABA4D13BBE0490092C12B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DEEABA3D13BBE0490092C12B = {
+			isa = PBXGroup;
+			children = (
+				DEEABA5913BBE0A50092C12B /* ScriptingBridge.framework */,
+				DEEABA4E13BBE0490092C12B /* vitunes */,
+				DEEABA4B13BBE0490092C12B /* Frameworks */,
+				DEEABA4913BBE0490092C12B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DEEABA4913BBE0490092C12B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DEEABA4813BBE0490092C12B /* vitunes */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DEEABA4B13BBE0490092C12B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DEEABA4C13BBE0490092C12B /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DEEABA4E13BBE0490092C12B /* vitunes */ = {
+			isa = PBXGroup;
+			children = (
+				DEEABA5B13BBE0C20092C12B /* iTunes.h */,
+				DEEABA4F13BBE0490092C12B /* main.m */,
+				DEEABA5313BBE0490092C12B /* vitunes.1 */,
+				DEEABA5113BBE0490092C12B /* Supporting Files */,
+			);
+			path = vitunes;
+			sourceTree = "<group>";
+		};
+		DEEABA5113BBE0490092C12B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DEEABA5213BBE0490092C12B /* vitunes-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DEEABA4713BBE0490092C12B /* vitunes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEEABA5613BBE0490092C12B /* Build configuration list for PBXNativeTarget "vitunes" */;
+			buildPhases = (
+				DEEABA4413BBE0490092C12B /* Sources */,
+				DEEABA4513BBE0490092C12B /* Frameworks */,
+				DEEABA4613BBE0490092C12B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = vitunes;
+			productName = vitunes;
+			productReference = DEEABA4813BBE0490092C12B /* vitunes */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DEEABA3F13BBE0490092C12B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Software by Daniel Choi";
+			};
+			buildConfigurationList = DEEABA4213BBE0490092C12B /* Build configuration list for PBXProject "vitunes" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DEEABA3D13BBE0490092C12B;
+			productRefGroup = DEEABA4913BBE0490092C12B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DEEABA4713BBE0490092C12B /* vitunes */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DEEABA4413BBE0490092C12B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEEABA5013BBE0490092C12B /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DEEABA5413BBE0490092C12B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		DEEABA5513BBE0490092C12B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DEEABA5713BBE0490092C12B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "vitunes/vitunes-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DEEABA5813BBE0490092C12B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "vitunes/vitunes-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DEEABA4213BBE0490092C12B /* Build configuration list for PBXProject "vitunes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEEABA5413BBE0490092C12B /* Debug */,
+				DEEABA5513BBE0490092C12B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DEEABA5613BBE0490092C12B /* Build configuration list for PBXNativeTarget "vitunes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEEABA5713BBE0490092C12B /* Debug */,
+				DEEABA5813BBE0490092C12B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DEEABA3F13BBE0490092C12B /* Project object */;
+}
