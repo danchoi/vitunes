@@ -8,6 +8,35 @@
 #import "iTunes.h"
 #import <Foundation/Foundation.h>
 
+
+// functions
+NSString *format(iTunesTrack *track) {
+  return [NSString stringWithFormat: @"%@ %@ %@ %@ %@ %@", 
+          track.databaseID,
+          track.name,
+          track.album,
+          track.artist,
+          track.year,
+          track.genre];
+          
+}
+
+@interface iTunesTrack (Vitunes) 
+  - (NSString *)textInfo;
+@end
+
+@implementation iTunesTrack (Vitunes) 
+- (NSString *)textInfo {
+    return [NSString stringWithFormat: @"%@ %@ %@ %@ %@ %@", 
+            self.databaseID,
+            self.name,
+            self.album,
+            self.artist,
+            self.year,
+            self.genre];
+}
+@end
+
 int main (int argc, const char * argv[])
 {
 
@@ -28,9 +57,10 @@ int main (int argc, const char * argv[])
     iTunesPlaylist *music = [[library playlists] objectWithName:@"Music"];
     SBElementArray *tracks = [music searchFor:query only:iTunesESrAAll];
     NSLog(@"%@", [tracks class]);    
-    NSArray *trackNames = [tracks arrayByApplyingSelector:@selector(name)];
+    NSArray *trackStrings = [tracks arrayByApplyingSelector:@selector(name)];
     
-    NSLog(@"%@", trackNames);
+    NSLog(@"%@", trackStrings);
+
 
 
     [pool drain];
