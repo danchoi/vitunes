@@ -28,25 +28,29 @@ SBElementArray *search(NSArray *args)  {
 }
 
 void playTrackID(NSArray *args) {
-  NSString *databaseIdString = [args objectAtIndex:0];
+  NSString *dstr = [args objectAtIndex:0];
   NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
   [f setNumberStyle:NSNumberFormatterDecimalStyle];
-  NSNumber *databaseId = [f numberFromString:databaseIdString];
+  NSNumber *databaseId = [f numberFromString:dstr];
   [f release];
-  NSArray *matchingTracks = [[music tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"databaseID == %@", databaseId]];
-  iTunesTrack* t = [matchingTracks objectAtIndex:0];
-  NSLog(@"playing track: %@", [t name]);
-  [t playOnce:false];
+  NSArray *xs = [[music tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"databaseID == %@", databaseId]];
+  iTunesTrack* t = [xs objectAtIndex:0];
+  NSLog(@"Playing track: %@", [t name]);
+  [t playOnce:true];
+}
+
+void artists() {
+  NSArray *tracksWithArtists = [[music tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"artist != ''"]];
+  NSArray *artists = [tracksWithArtists arrayByApplyingSelector:@selector(artist)]; 
+  NSLog(@"artists: %@", artists);
+
 }
 
 int main (int argc, const char * argv[]) {
   NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-
   NSArray *rawArgs = [[NSProcessInfo processInfo] arguments];
   NSString *action;
   NSArray *args;
-
-  NSLog(@"args: %@", rawArgs);
   if ([rawArgs count] < 2) {
     action = @"search";
     args = [NSArray arrayWithObject:@"bach"];
@@ -57,10 +61,11 @@ int main (int argc, const char * argv[]) {
     aRange.length = [rawArgs count] - 2;
     args = [rawArgs subarrayWithRange:aRange];
   }
-
   iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
   library = [[iTunes sources] objectWithName:@"Library"];
   music = [[library playlists] objectWithName:@"Music"];
+
+  artists();
 
   if ([action isEqual: @"search"]) {
     NSArray *tracks = search(args);
@@ -70,7 +75,6 @@ int main (int argc, const char * argv[]) {
   } else if ([action isEqual: @"playTrackID"]) { 
     playTrackID(args);
   } 
-
   [pool drain];
   return 0;
 }

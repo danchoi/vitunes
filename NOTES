@@ -77,3 +77,17 @@ vim vitunes.rb
 
 [1]+  Stopped                 vim vitunes.rb
 
+
+------------------------------------------------------------------------
+getting all artists in applescript
+
+tell application "iTunes"
+   set myList to get artist of (every track of library playlist 1 whose
+   artist is not missing value)
+   end tell
+   set oldDelim to AppleScript's text item delimiters
+   set AppleScript's text item delimiters to ASCII character 10
+   set allArtists to myList as text
+   set AppleScript's text item delimiters to oldDelim
+   do shell script "echo " & (quoted form of allArtists) & " | sort -u "
+
