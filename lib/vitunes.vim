@@ -9,36 +9,54 @@ let mapleader = ','
 " development build of command line tool
 let s:vitunes_tool = '/Users/choi/projects/vitunes/build/Release/vitunes '
 
-let s:search_prompt = "Search iTunes Music Library: "
+let s:search_prompt = "Search iTunes Music Library:  "
+let s:search_prompt_len = len(s:search_prompt)
+let s:selectionList = []
 
+" the search match window
 function! ViTunes()
-  exec "leftabove split "
+  leftabove split ViTunesBuffer
   setlocal textwidth=0
-  setlocal completefunc=ViTunesCompleteFunction
+  noremap <buffer> <leader>s <Esc>:call <SID>openQueryWindow()<cr>
+  noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
+  call <SID>openQueryWindow()
+endfunction
+
+function! s:playTrack()
+  let trackID = matchstr(getline(line('.')), '^\d\+')
+  echo trackID
+  call system(s:vitunes_tool . "playTrackID " . trackID)
+endfunc
+
+function! s:openQueryWindow()
+  leftabove split SearchTracks
+  setlocal textwidth=0
+  " setlocal completefunc=ViTunesCompleteFunction
   setlocal buftype=nofile
   setlocal noswapfile
   setlocal modifiable
   resize 1
+  " TODO this should depend on the type of search
   inoremap <silent> <buffer> <cr> <Esc>:call <SID>submit_query()<CR> 
   noremap <buffer> q <Esc>:close<cr>
   inoremap <buffer> <Esc> <Esc>:close<cr>
   call setline(1, s:search_prompt)
   normal $
-  call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
+  call feedkeys("a", "t")
 endfunction
 
 function! ViTunesCompleteFunction(findstart, base)
   if a:findstart
-    let start = len(s:search_prompt) 
+    let start = s:search_prompt_len
     return start
   else
     " let base = s:trimString(a:base)
     if (a:base == '')
-      return [] " s:selectionlist
+      return [] 
     else
       let res = []
-      " find tracks matching "a:base"
-      let s:selectionList = split(system(s:vitunes_tool . ' search ' . a:base), '\n')
+      " find tracks matching a:base
+      let s:selectionList = split(s:searchTracks(a:base), '\n')
       for m in s:selectionList
         if m =~ '\c' . a:base 
           call add(res, m)
@@ -49,19 +67,21 @@ function! ViTunesCompleteFunction(findstart, base)
   endif
 endfun
 
+function! s:search_tracks(q)
+  let res = split(system(s:vitunes_tool . ' search ' . a:q), '\n')
+  put =res
+endfunction
+
 " selection window pick
 function! s:submit_query()
-  echo "test"
-  return
-
-  " let query = s:trimString(join(split(getline(line('.')), ":")[1:-1], ":"))
-  let query = getline('.')[len(s:prompt):]
+  let query = getline('.')[len(s:search_prompt):]
   close
   if (query == '') " no selection
     return
   end
   " TODO
-  " call ViTunes with query
+  call s:search_tracks(query)
+  "
 endfunction
 
 " get a free DRB URI
