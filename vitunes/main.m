@@ -120,7 +120,7 @@ int main (int argc, const char * argv[]) {
 
   if ([action isEqual: @"search"]) {
     printTracks(search(args));
-  } else if ([action isEqual: @"play"]) { 
+  } else if ([action isEqual: @"playTrackID"]) { 
     playTrackID(args);
   } else if ([action isEqual: @"group"]) {
     groupTracksBy([args objectAtIndex:0]);

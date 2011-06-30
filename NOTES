@@ -147,6 +147,7 @@ Let user use Mac stop key? No, what if this is via remote?
 
 Some commands
 
+playTrackID 1423
 itunes playpause
 itunes currentPlaylist => prints current playlist name
 predicate "name contains 'love'"
@@ -171,6 +172,40 @@ TODO
 Try adding a track to a playlist
 
 Try creating a playlist
+
+Rename command line tool itunes-unix since it is general
+
+
+UI playOnce a track
+play a playlist
+forward and next (already ready to bind to vimscript)
+
+DO IN LATER RELEASE:
+create a playlist
+move tracks to a playlist
+
+  Stick with search, navigation and playing functions for first release.
+  Release earlier this way. The simpler function set is useful enough.
+
+TODO
+
+artists, genre, album --> these will open Vim autocomplete dropdown
+selectors
+
+choose an item from the completion window, then we show the standard
+tracks list 
+
+- tracks list will either be a playlist, a search result, or a predicate
+  filter (e.g. all tracks with artist == or album ==
+
+- select a track to play. if playlist, start playing continuously
+
+
+
+
+
+
+
 
 
 
