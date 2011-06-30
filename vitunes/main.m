@@ -16,7 +16,7 @@ NSString *format(iTunesTrack *track) {
   NSString *artist = track.artist;
   NSInteger year = track.year;
   NSString *genre = track.genre;
-  return [NSString stringWithFormat: @"%d %@ %@ %@ (%d) %@ \n", 
+  return [NSString stringWithFormat: @"%d %@ %@ %@ (%d) %@", 
           databaseID,
           name,
           album,
@@ -27,13 +27,35 @@ NSString *format(iTunesTrack *track) {
 }
 
 static iTunesPlaylist *music;
+static iTunesSource *library;
 
-void search(NSString *query) {
+NSArray *search(NSString *query) {
     SBElementArray *tracks = [music searchFor:query only:iTunesESrAAll];
     NSLog(@"%@", [tracks class]);    
-    for (iTunesTrack *track in tracks) {
-      printf("%s\n", [format(track) cStringUsingEncoding: NSUTF8StringEncoding]);
-    }
+    return tracks;
+}
+
+
+void playID(NSNumber *databaseId) {
+     NSArray *matchingTracks = [[music tracks] 
+       filteredArrayUsingPredicate:
+         [NSPredicate predicateWithFormat:@"databaseID == %@", databaseId]];
+     iTunesTrack* t = [matchingTracks objectAtIndex:0];
+     NSLog(@"found track %@", [t name]);
+     [t playOnce:false];
+}
+    
+
+// 
+void play(NSString *query, NSString *index) {
+    printf("play %s %s\n", 
+        [query cStringUsingEncoding: NSUTF8StringEncoding],
+        [index cStringUsingEncoding: NSUTF8StringEncoding]);
+    int idx = [index intValue];
+    NSArray *tracks = search(query);
+    iTunesTrack *t = [tracks objectAtIndex:idx];
+    NSLog(@"%@", [t name]);
+    [t playOnce:true];
 }
 
 int main (int argc, const char * argv[])
@@ -45,17 +67,39 @@ int main (int argc, const char * argv[])
     // insert code here...
     
     NSString *query;
-    
+    NSString *action; 
     NSArray *args = [[NSProcessInfo processInfo] arguments];
-    if ([args count] > 1) 
-        query = [[[NSProcessInfo processInfo] arguments] objectAtIndex:1];
-    else
+    if ([args count] > 2) {
+        action = [args objectAtIndex:1];
+        query = [args objectAtIndex:2];
+    } else {
+        action = @"search";
         query = @"Bach";
+    };
     
     iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
-    iTunesSource *library = [[iTunes sources] objectWithName:@"Library"];
+    library = [[iTunes sources] objectWithName:@"Library"];
     music = [[library playlists] objectWithName:@"Music"];
-    search(query);
+    if ([action isEqual: @"search"]) {
+      NSArray *tracks = search(query);
+      for (iTunesTrack *track in tracks) {
+        printf("%s\n", [format(track) cStringUsingEncoding: NSUTF8StringEncoding]);
+      }
+    } else if ([action isEqual: @"playID"]) { /* play by databaseId 
+                                                no need for search term
+    */
+      NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+      [f setNumberStyle:NSNumberFormatterDecimalStyle];
+      NSNumber *databaseId = [f numberFromString:[args objectAtIndex: 2]];
+      [f release];
+      NSLog(@"looking for track %@", databaseId);
+      playID(databaseId);
+
+
+    } else  { /* play by index */
+      NSString *index = [args objectAtIndex: 3];
+      play(query, index);
+    }
 
 
     [pool drain];
