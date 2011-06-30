@@ -154,6 +154,9 @@ predicate "name contains 'love'"
 playPlaylits Purchased
 playlistTracks Purchased
 
+group artist
+group name
+
 TODO
 - maybe show iTunesPlaylist properties:
   - duration (total length of playlist in secs)

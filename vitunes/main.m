@@ -39,10 +39,14 @@ void playTrackID(NSArray *args) {
   [t playOnce:true]; // false would play next song on list after this one finishes
 }
 
-void artists() {
-  NSArray *artists = [[[music tracks] arrayByApplyingSelector:@selector(artist)]
-    filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"artist != ''"]];
-  NSLog(@"artists: %@", artists);
+void groupTracksBy(NSString *property) {
+  // e.g. artist, genre
+  // year won't work yet
+  NSArray *results = [[[music tracks] arrayByApplyingSelector:NSSelectorFromString(property)]
+    filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"%@ != ''", property]];
+  for (NSString *s in results) {
+    printf("%s\n", [s cStringUsingEncoding: NSUTF8StringEncoding]);
+  }
 }
 
 void printTracks(NSArray *tracks) {
@@ -112,8 +116,8 @@ int main (int argc, const char * argv[]) {
     printTracks(search(args));
   } else if ([action isEqual: @"play"]) { 
     playTrackID(args);
-  } else if ([action isEqual: @"artists"]) {
-    artists();
+  } else if ([action isEqual: @"group"]) {
+    groupTracksBy([args objectAtIndex:0]);
   } else if ([action isEqual: @"predicate"]) {
     tracksMatchingPredicate([args objectAtIndex:0]);
   } else if ([action isEqual: @"playlists"]) {
