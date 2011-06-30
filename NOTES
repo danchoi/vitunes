@@ -1,0 +1,79 @@
+
+should put a max results limit
+
+
+we need to keep the tracks recently foudn in the search list in memory?
+
+Then that means keeping the process alive in memory. But we can also
+just run the search again and find the track by index.
+
+Tried Macruby but it is too hard to get either multithreaded DRb or
+sinatra working
+
+Vimscript can remember the last command send to system() and just append
+an index number to it
+
+
+
+Store lists like in Vmail
+Put databaseID off screen and use it to look up anything
+
+
+
+https://bitbucket.org/kamitchell/itunesbridged
+
+https://github.com/mislav/itunes/blame/master/itunes.rb
+
+https://github.com/mislav/itunes
+
+  ITunesManager.app.run
+
+  # start playing at the beginning
+  ITunesManager.music.playOnce(false)
+
+  ITunesManager.player_state  #=> :playing
+
+  ITunesManager.app.playpause
+  ITunesManager.player_state  #=> :paused
+
+  track = ITunesManager.current_track
+
+  # for more properties, see iTunes.h under "@interface iTunesTrack"
+  track.name
+  track.artist
+  track.album
+
+  # playlist management
+  favorites = ITunesManager.find_or_create_playlist 'Favorites'
+
+  track = ITunesManager.music.fileTracks.first
+  favorites << track
+
+  favorites.add ITunesManager.music.search('daft punk')
+  favorites.add ITunesManager.music.search('pendulum', :artists)
+  favorites.add ITunesManager.music.search('easy rider', :albums)
+
+
+
+[choi spartan~/p/vitunes]$ /Users/choi/projects/vitunes/build/Release/vitunes search rush
+2011-06-30 02:08:59.516 vitunes[68007:903] args: (
+    "/Users/choi/projects/vitunes/build/Release/vitunes",
+    search,
+    rush
+)
+1746 P56/Brushstroking Fingerstyle Blues Guitar Arnie Berle and Mark Galbo (1993) Religious
+1400 Cold Fire Counterparts Rush (2004) Rock
+1402 Mystic Rhythms Retrospective, Vol. 2 (1981-1987) Rush (1997) Rock
+1404 The Big Money Rush: Spirit of Radio - Greatest Hits 1974-1987 Rush (2003) Rock
+[choi spartan~/p/vitunes]$ /Users/choi/projects/vitunes/build/Release/vitunes playTrackID 1404
+2011-06-30 02:09:09.536 vitunes[68010:903] args: (
+    "/Users/choi/projects/vitunes/build/Release/vitunes",
+    playTrackID,
+    1404
+)
+2011-06-30 02:09:09.646 vitunes[68010:903] playing track: The Big Money
+[choi spartan~/p/vitunes]$ fg
+vim vitunes.rb
+
+[1]+  Stopped                 vim vitunes.rb
+
