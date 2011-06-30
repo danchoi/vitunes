@@ -5,9 +5,9 @@
 let mapleader = ','
 
 " uncomment for production
-" let s:search_command = 'vitunes search '
+" let s:vitunes_tool = 'vitunes'
 " development build of command line tool
-let s:search_command = 'vitunes search '
+let s:vitunes_tool = '/Users/choi/projects/vitunes/build/Release/vitunes '
 
 let s:search_prompt = "Search iTunes Music Library: "
 
@@ -32,14 +32,15 @@ function! ViTunesCompleteFunction(findstart, base)
     let start = len(s:search_prompt) 
     return start
   else
-    let base = s:trimString(a:base)
-    if (base == '')
-      " TODO call ViTunes search
-      return s:selectionlist
+    " let base = s:trimString(a:base)
+    if (a:base == '')
+      return [] " s:selectionlist
     else
       let res = []
-      for m in s:selectionlist
-        if m =~ '\c' . base 
+      " find tracks matching "a:base"
+      let s:selectionList = split(system(s:vitunes_tool . ' search ' . a:base), '\n')
+      for m in s:selectionList
+        if m =~ '\c' . a:base 
           call add(res, m)
         endif
       endfor
@@ -50,6 +51,9 @@ endfun
 
 " selection window pick
 function! s:submit_query()
+  echo "test"
+  return
+
   " let query = s:trimString(join(split(getline(line('.')), ":")[1:-1], ":"))
   let query = getline('.')[len(s:prompt):]
   close

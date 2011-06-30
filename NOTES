@@ -161,6 +161,7 @@ group artist
 group name
 # NOT group year because year involves int, not NSString
 
+------------------------------------------------------------------------
 
 TODO
 - maybe show iTunesPlaylist properties:
