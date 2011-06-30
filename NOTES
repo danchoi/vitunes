@@ -150,12 +150,16 @@ Some commands
 itunes playpause
 itunes currentPlaylist => prints current playlist name
 predicate "name contains 'love'"
+itunes currentTrack => print current track with smae formatting for
+  listed tracks
 
 playPlaylits Purchased
 playlistTracks Purchased
 
 group artist
 group name
+# NOT group year because year involves int, not NSString
+
 
 TODO
 - maybe show iTunesPlaylist properties:
@@ -163,6 +167,12 @@ TODO
   - shuffle BOOL
   - songRepeat (a constant)
   - time <= MM:SS
+
+Try adding a track to a playlist
+
+Try creating a playlist
+
+
 
 
 

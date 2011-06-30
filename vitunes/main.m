@@ -86,7 +86,13 @@ void itunes(NSString *command) {
   id result = [iTunes performSelector:selector];
   if (result) {
     if ([result respondsToSelector:@selector(name)]) {
-      printf("%s\n", [((iTunesItem *)result).name cStringUsingEncoding: NSUTF8StringEncoding]);
+      NSString *s;
+      // Note that the real classname is ITunesTrack, not iTunesTrack;
+      if ([[result className] isEqual:@"ITunesTrack"])
+        s = formatTrackForDisplay((iTunesTrack *)result);
+      else
+        s = ((iTunesItem *)result).name;
+      printf("%s\n", [s cStringUsingEncoding: NSUTF8StringEncoding]);
     }
   }
 }
