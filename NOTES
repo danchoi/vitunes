@@ -149,8 +149,10 @@ Some commands
 
 itunes playpause
 itunes currentPlaylist => prints current playlist name
-vitunes/build/Release/vitunes predicate "name contains 'love'"
+predicate "name contains 'love'"
 
+playPlaylits Purchased
+playlistTracks Purchased
 
 TODO
 - maybe show iTunesPlaylist properties:
