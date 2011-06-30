@@ -46,6 +46,12 @@ void artists() {
 
 }
 
+void tracksMatchingPredicate(NSString *predString) {
+  NSArray *tracks = [[music tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:predString]];
+  NSLog(@"tracks: %@", [tracks arrayByApplyingSelector:@selector(name)]);
+
+}
+
 int main (int argc, const char * argv[]) {
   NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
   NSArray *rawArgs = [[NSProcessInfo processInfo] arguments];
@@ -65,8 +71,10 @@ int main (int argc, const char * argv[]) {
   library = [[iTunes sources] objectWithName:@"Library"];
   music = [[library playlists] objectWithName:@"Music"];
 
-  artists();
+  //artists();
 
+  tracksMatchingPredicate([args objectAtIndex:0]);
+  return 0;
   if ([action isEqual: @"search"]) {
     NSArray *tracks = search(args);
     for (iTunesTrack *track in tracks) {

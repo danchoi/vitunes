@@ -91,3 +91,32 @@ tell application "iTunes"
    set AppleScript's text item delimiters to oldDelim
    do shell script "echo " & (quoted form of allArtists) & " | sort -u "
 
+
+** BUILD SUCCEEDED **
+
+[choi spartan~/p/vitunes]$ /Users/choi/projects/vitunes/build/Release/vitunes match "artist == 'U2'"
+2011-06-30 02:35:27.146 vitunes[68774:903] tracks: (
+    "Beautiful Day",
+    "Stuck In A Moment You Can't Get Out Of",
+    Elevation,
+    "Walk On",
+    Kite,
+    "In A Little While",
+    "Wild Honey",
+    "Peace On Earth",
+    "When I Look At The World",
+    "New York",
+    Grace,
+    "Pride (In The Name Of Love)",
+    "With Or Without You",
+    "Even Better Than the Real Thing",
+    "Mysterious Ways",
+    "Electrical Storm (William Orbit Mix)",
+    One,
+    "Stay (Faraway, so Close!)",
+    "Zoo Station",
+    Magnificent,
+    Always
+)
+
+
