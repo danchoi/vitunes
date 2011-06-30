@@ -67,12 +67,15 @@ void playPlaylist(NSString *playlistName) {
   [playlist playOnce:true];
 }
 
-
 void tracksMatchingPredicate(NSString *predString) {
   // predicate can be something like "artist == 'U2'"
   NSArray *tracks = [[[music tracks] arrayByApplyingSelector:@selector(name)]
     filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:predString]];
   NSLog(@"tracks: %@", tracks);
+}
+
+void itunes(NSString *command) {
+  [iTunes performSelector:NSSelectorFromString(command)];
 }
 
 int main (int argc, const char * argv[]) {
@@ -108,6 +111,9 @@ int main (int argc, const char * argv[]) {
     playlistTracks([args objectAtIndex:0]);
   } else if ([action isEqual: @"playPlaylist"]) {
     playPlaylist([args objectAtIndex:0]);
+  } else if ([action isEqual: @"itunes"]) {
+    // next argument is an action for iTunes to perform
+    itunes([args objectAtIndex:0]);
   }
   [pool drain];
   return 0;
