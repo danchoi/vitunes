@@ -69,7 +69,9 @@ endfun
 
 function! s:search_tracks(q)
   let res = split(system(s:vitunes_tool . ' search ' . a:q), '\n')
+  1,$delete
   put =res
+  1delete
 endfunction
 
 " selection window pick
@@ -79,9 +81,7 @@ function! s:submit_query()
   if (query == '') " no selection
     return
   end
-  " TODO
   call s:search_tracks(query)
-  "
 endfunction
 
 " get a free DRB URI
