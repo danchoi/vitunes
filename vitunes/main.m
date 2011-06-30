@@ -45,7 +45,7 @@ void artists() {
   NSLog(@"artists: %@", artists);
 }
 
-void printTracks(SBElementArray *tracks) {
+void printTracks(NSArray *tracks) {
   for (iTunesTrack *track in tracks) {
     printf("%s\n", [formatTrackForDisplay(track) cStringUsingEncoding: NSUTF8StringEncoding]);
   }
@@ -69,14 +69,25 @@ void playPlaylist(NSString *playlistName) {
 
 void tracksMatchingPredicate(NSString *predString) {
   // predicate can be something like "artist == 'U2'"
-  NSArray *tracks = [[[music tracks] arrayByApplyingSelector:@selector(name)]
+  NSArray *tracks = [[music tracks] 
     filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:predString]];
-  NSLog(@"tracks: %@", tracks);
+  printTracks(tracks);
 }
 
+// This dispatches to any methods on iTunesApplication with no parameters.
+// If method returns an iTunesItem, its 'name' property will be called and
+// displayed.
 void itunes(NSString *command) {
-  [iTunes performSelector:NSSelectorFromString(command)];
+  SEL selector = NSSelectorFromString(command);
+  id result = [iTunes performSelector:selector];
+  if (result) {
+    if ([result respondsToSelector:@selector(name)]) {
+      printf("%s\n", [((iTunesItem *)result).name cStringUsingEncoding: NSUTF8StringEncoding]);
+    }
+  }
 }
+
+
 
 int main (int argc, const char * argv[]) {
   NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
@@ -112,7 +123,7 @@ int main (int argc, const char * argv[]) {
   } else if ([action isEqual: @"playPlaylist"]) {
     playPlaylist([args objectAtIndex:0]);
   } else if ([action isEqual: @"itunes"]) {
-    // next argument is an action for iTunes to perform
+    // argument is an action for iTunesApplication to perform
     itunes([args objectAtIndex:0]);
   }
   [pool drain];
