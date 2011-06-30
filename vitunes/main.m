@@ -47,6 +47,7 @@ void artists() {
 }
 
 void tracksMatchingPredicate(NSString *predString) {
+  // predicate can be something like "artist == 'U2'"
   NSArray *tracks = [[music tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:predString]];
   NSLog(@"tracks: %@", [tracks arrayByApplyingSelector:@selector(name)]);
 
@@ -71,18 +72,18 @@ int main (int argc, const char * argv[]) {
   library = [[iTunes sources] objectWithName:@"Library"];
   music = [[library playlists] objectWithName:@"Music"];
 
-  //artists();
-
-  tracksMatchingPredicate([args objectAtIndex:0]);
-  return 0;
   if ([action isEqual: @"search"]) {
     NSArray *tracks = search(args);
     for (iTunesTrack *track in tracks) {
       printf("%s\n", [formatTrackForDisplay(track) cStringUsingEncoding: NSUTF8StringEncoding]);
     }
-  } else if ([action isEqual: @"playTrackID"]) { 
+  } else if ([action isEqual: @"play"]) { 
     playTrackID(args);
-  } 
+  } else if ([action isEqual: @"artists"]) {
+    artists();
+  } else if ([action isEqual: @"predicate"]) {
+    tracksMatchingPredicate([args objectAtIndex:0]);
+  }
   [pool drain];
   return 0;
 }
