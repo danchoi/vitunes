@@ -169,12 +169,11 @@ TODO
   - songRepeat (a constant)
   - time <= MM:SS
 
-Try adding a track to a playlist
+Try adding a track to a playlist (LATER)
 
-Try creating a playlist
+Try creating a playlist (LATER)
 
 Rename command line tool itunes-unix since it is general
-
 
 UI playOnce a track
 play a playlist
@@ -187,7 +186,7 @@ move tracks to a playlist
   Stick with search, navigation and playing functions for first release.
   Release earlier this way. The simpler function set is useful enough.
 
-TODO
+TODO -- all on Vim side
 
 artists, genre, album --> these will open Vim autocomplete dropdown
 selectors
@@ -199,15 +198,5 @@ tracks list
   filter (e.g. all tracks with artist == or album ==
 
 - select a track to play. if playlist, start playing continuously
-
-
-
-
-
-
-
-
-
-
 
 

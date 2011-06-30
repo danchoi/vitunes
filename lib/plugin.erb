@@ -1,0 +1,9 @@
+" Vim script that add ability to search and play iTunes tracks from Vim
+" Maintainer:	Daniel Choi <dhchoi@gmail.com>
+" License: MIT License (c) 2011 Daniel Choi
+
+if exists("g:ViTunesLoaded") || &cp || version < 700
+  finish
+endif
+source <%= vimscript_file %>
+

@@ -27,11 +27,10 @@ SBElementArray *search(NSArray *args)  {
   return [music searchFor:query only:iTunesESrAAll];
 }
 
-void playTrackID(NSArray *args) {
-  NSString *dstr = [args objectAtIndex:0];
+void playTrackID(NSString *trackID) {
   NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
   [f setNumberStyle:NSNumberFormatterDecimalStyle];
-  NSNumber *databaseId = [f numberFromString:dstr];
+  NSNumber *databaseId = [f numberFromString:trackID];
   [f release];
   NSArray *xs = [[music tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"databaseID == %@", databaseId]];
   iTunesTrack* t = [xs objectAtIndex:0];
@@ -121,7 +120,7 @@ int main (int argc, const char * argv[]) {
   if ([action isEqual: @"search"]) {
     printTracks(search(args));
   } else if ([action isEqual: @"playTrackID"]) { 
-    playTrackID(args);
+    playTrackID([args objectAtIndex:0]);
   } else if ([action isEqual: @"group"]) {
     groupTracksBy([args objectAtIndex:0]);
   } else if ([action isEqual: @"predicate"]) {
