@@ -3,7 +3,12 @@
 " License: MIT License (c) 2011 Daniel Choi
 
 let mapleader = ','
+
+" uncomment for production
+" let s:search_command = 'vitunes search '
+" development build of command line tool
 let s:search_command = 'vitunes search '
+
 let s:search_prompt = "Search iTunes Music Library: "
 
 function! ViTunes()
