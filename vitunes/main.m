@@ -36,21 +36,43 @@ void playTrackID(NSArray *args) {
   NSArray *xs = [[music tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"databaseID == %@", databaseId]];
   iTunesTrack* t = [xs objectAtIndex:0];
   NSLog(@"Playing track: %@", [t name]);
-  [t playOnce:true];
+  [t playOnce:true]; // false would play next song on list after this one finishes
 }
 
 void artists() {
-  NSArray *tracksWithArtists = [[music tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"artist != ''"]];
-  NSArray *artists = [tracksWithArtists arrayByApplyingSelector:@selector(artist)]; 
+  NSArray *artists = [[[music tracks] arrayByApplyingSelector:@selector(artist)]
+    filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"artist != ''"]];
   NSLog(@"artists: %@", artists);
-
 }
+
+void printTracks(SBElementArray *tracks) {
+  for (iTunesTrack *track in tracks) {
+    printf("%s\n", [formatTrackForDisplay(track) cStringUsingEncoding: NSUTF8StringEncoding]);
+  }
+}
+
+void playlists() {
+  for (iTunesPlaylist *p in [library playlists]) {
+    printf("%s\n", [p.name cStringUsingEncoding: NSUTF8StringEncoding]);
+  }
+}
+
+void playlistTracks(NSString *playlistName) {
+  iTunesPlaylist *playlist = [[library playlists] objectWithName:playlistName];
+  printTracks([playlist tracks]);
+}
+
+void playPlaylist(NSString *playlistName) {
+  iTunesPlaylist *playlist = [[library playlists] objectWithName:playlistName];
+  [playlist playOnce:true];
+}
+
 
 void tracksMatchingPredicate(NSString *predString) {
   // predicate can be something like "artist == 'U2'"
-  NSArray *tracks = [[music tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:predString]];
-  NSLog(@"tracks: %@", [tracks arrayByApplyingSelector:@selector(name)]);
-
+  NSArray *tracks = [[[music tracks] arrayByApplyingSelector:@selector(name)]
+    filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:predString]];
+  NSLog(@"tracks: %@", tracks);
 }
 
 int main (int argc, const char * argv[]) {
@@ -68,21 +90,24 @@ int main (int argc, const char * argv[]) {
     aRange.length = [rawArgs count] - 2;
     args = [rawArgs subarrayWithRange:aRange];
   }
-  iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+  iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
   library = [[iTunes sources] objectWithName:@"Library"];
   music = [[library playlists] objectWithName:@"Music"];
 
   if ([action isEqual: @"search"]) {
-    NSArray *tracks = search(args);
-    for (iTunesTrack *track in tracks) {
-      printf("%s\n", [formatTrackForDisplay(track) cStringUsingEncoding: NSUTF8StringEncoding]);
-    }
+    printTracks(search(args));
   } else if ([action isEqual: @"play"]) { 
     playTrackID(args);
   } else if ([action isEqual: @"artists"]) {
     artists();
   } else if ([action isEqual: @"predicate"]) {
     tracksMatchingPredicate([args objectAtIndex:0]);
+  } else if ([action isEqual: @"playlists"]) {
+    playlists();
+  } else if ([action isEqual: @"playlistTracks"]) {
+    playlistTracks([args objectAtIndex:0]);
+  } else if ([action isEqual: @"playPlaylist"]) {
+    playPlaylist([args objectAtIndex:0]);
   }
   [pool drain];
   return 0;

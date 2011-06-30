@@ -132,3 +132,17 @@ set allArtists to myList as text
 set AppleScript's text item delimiters to oldDelim
 do shell script "echo " & (quoted form of allArtists) & " | sort -u "
 
+
+
+------------------------------------------------------------------------
+Thu Jun 30 07:44:42 EDT 2011
+
+
+Don't do any playlist management (writing) for the first release. Stick
+to navigation, search, playing
+
+
+Let user use Mac stop key? No, what if this is via remote?
+
+
+
