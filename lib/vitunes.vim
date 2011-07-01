@@ -251,7 +251,8 @@ function! s:submitQueryOrSelection(command)
   silent! put =res
   silent! 1delete
   setlocal nomodifiable
-
+  " position cursor at 1st track
+  normal 3G
   if (a:command == 'playlistTracks')
     let s:currentPlaylist = query
   else
