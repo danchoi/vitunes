@@ -2,9 +2,7 @@
 
 ViTunes lets you control and navigate iTunes from the comfort of Vim.
 
-<a href="images-vitunes/bowie.png" rel="lightbox[screens]"><img src="images-vitunes/bowie-sm.png" /></a>
-<a href="images-vitunes/select-artist.png" rel="lightbox[screens]"><img src="images-vitunes/select-artist-sm.png" /></a>
-<a href="images-vitunes/select-playlist.png" rel="lightbox[screens]"><img src="images-vitunes/select-playlist-sm.png" /></a>
+[screenshots]
 
 Benefits:
 
