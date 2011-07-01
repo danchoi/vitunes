@@ -128,7 +128,6 @@ function! s:openGenreDropdown()
   call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
 endfunction
 
-
 function! s:openAlbumDropdown()
   leftabove split ChoosePlaylist
   inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('album')<CR> 
@@ -139,9 +138,6 @@ function! s:openAlbumDropdown()
   call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
 endfunction
 
-
-
-"  Search query
 
 
 " selection window pick or search window query
@@ -168,6 +164,6 @@ function! s:submitQueryOrSelection(command)
 endfunction
 
 nnoremap <silent> <leader>it :call ViTunes()<cr>
-"
+
 let g:ViTunesLoaded = 1
 

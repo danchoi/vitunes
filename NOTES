@@ -198,15 +198,17 @@ tracks list
 - tracks list will either be a playlist, a search result, or a predicate
   filter (e.g. all tracks with artist == or album ==
 
-- select a track to play. if playlist, start playing continuously
+
+------------------------------------------------------------------------
+
+- select a track to play. if IN playlist, start playing continuously
 
 TODO -- handle case of missing Track (not on disk); e.g. ATB
 
-TODO bind volume control, playpause, next, 
-other commands, let user select from dropdown?
+TODO bind volume control, playpause, next, other commands, let user select from dropdown?
 TODO improve track display
 
-TODO LATER sort title -- no urgent
+TODO LATER sort title -- not urgent
 
 
 
