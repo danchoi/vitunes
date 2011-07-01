@@ -35,14 +35,17 @@ void playTrackID(NSString *trackID) {
   NSArray *xs = [[libraryPlaylist tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"databaseID == %@", databaseId]];
   iTunesTrack* t = [xs objectAtIndex:0];
   NSLog(@"Playing track: %@", [t name]);
+  // TODO report a missing track?
   [t playOnce:true]; // false would play next song on list after this one finishes
 }
 
 void groupTracksBy(NSString *property) {
   // e.g. artist, genre
-  // year won't work yet
+  // NOTE year won't work yet
+  // NOTE pipe the output through uniq and sort --ignore-case
   NSArray *results = [[[libraryPlaylist tracks] arrayByApplyingSelector:NSSelectorFromString(property)]
     filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"%@ != ''", property]];
+
   for (NSString *s in results) {
     printf("%s\n", [s cStringUsingEncoding: NSUTF8StringEncoding]);
   }

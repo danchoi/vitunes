@@ -200,12 +200,13 @@ tracks list
 
 - select a track to play. if playlist, start playing continuously
 
-
-TODO -- handle case of missing Track (not on disk)
-
-**** TODO -- allow  playTrack to search all library, not just music!
+TODO -- handle case of missing Track (not on disk); e.g. ATB
 
 TODO -- ARTISTS and GENRE lists
+TODO bind volume control, playpause, next, 
+other commands, let user select from dropdown?
+TODO improve track display
+
 
 
 
