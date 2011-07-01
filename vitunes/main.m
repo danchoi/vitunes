@@ -186,11 +186,18 @@ void itunes(NSString *command) {
     if ([result respondsToSelector:@selector(name)]) {
       NSString *s;
       // Note that the real classname is ITunesTrack, not iTunesTrack;
-      if ([[result className] isEqual:@"ITunesTrack"])
-        s = formatTrackForDisplay((iTunesTrack *)result);
-      else
+      // For current Track
+      if ([[result className] isEqual:@"ITunesTrack"]) {
+         s = [NSString stringWithFormat:@"\"%@\" by %@ from %@",
+           [((iTunesTrack *)result) name],
+           [((iTunesTrack *)result) artist],
+           [((iTunesTrack *)result) album]
+         ];
+         printf("Current track: %s", [s cStringUsingEncoding: NSUTF8StringEncoding]);
+      } else {
         s = ((iTunesItem *)result).name;
-      printf("%s\n", [s cStringUsingEncoding: NSUTF8StringEncoding]);
+        printf("%s\n", [s cStringUsingEncoding: NSUTF8StringEncoding]);
+      }
     }
   }
 }

@@ -43,6 +43,10 @@ function! s:runCommand(command)
   return res
 endfunction
 
+function! ViTunesStatusLine()
+  return "%<%f\ Press ? for help. "."%r%=%-14.(%l,%c%V%)\ %P"
+endfunction
+
 " the main window
 function! ViTunes()
   leftabove split ViTunesBuffer
@@ -61,10 +65,13 @@ function! ViTunes()
 
   noremap <buffer> > :call <SID>itunesControl("nextTrack")<cr>
   noremap <buffer> < :call <SID>itunesControl("previousTrack")<cr>
+  noremap <buffer> .  :call <SID>itunesControl("currentTrack")<cr>
+
   noremap <buffer> <Space>  :call <SID>itunesControl("playpause")<cr>
   noremap <buffer> -  :call <SID>changeVolume("volumeDown")<cr>
   noremap <buffer> +  :call <SID>changeVolume("volumeUp")<cr>
   noremap <buffer> =  :call <SID>changeVolume("volumeUp")<cr>
+
   " Not working yet
   " noremap <buffer> <BS> :call <SID>deleteTracksFromPlaylist()<CR> "
   noremap <buffer> ,q :close<CR>
@@ -72,6 +79,7 @@ function! ViTunes()
   "noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
   noremap <buffer> <cr> :call <SID>playTrack()<cr>
   setlocal nomodifiable
+  setlocal statusline=%!ViTunesStatusLine()
 endfunction
 
 function! s:help()
@@ -276,7 +284,6 @@ function! s:deleteTracksFromPlaylist() range
   " delete lines from buffer
   echom res
 endfunction
-
 
 nnoremap <silent> <leader>i :call ViTunes()<cr>
 
