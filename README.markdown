@@ -58,7 +58,7 @@ Press `ENTER` or `ESC` to exit drop down selection mode.
 
 * `+` louder
 * `-` softer
-* `=` softer
+* `=` louder
 
 ### Playhead
 
