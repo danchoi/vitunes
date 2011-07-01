@@ -39,7 +39,7 @@ function! ViTunes()
 endfunction
 
 function! s:playTrack()
-  let trackID = matchstr(getline(line('.')), '^\d\+')
+  let trackID = matchstr(getline(line('.')), '\d\+$')
   call system(s:vitunes_tool . "playTrackID " . trackID)
 endfunc
 

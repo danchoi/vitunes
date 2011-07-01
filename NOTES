@@ -208,6 +208,10 @@ TODO -- handle case of missing Track (not on disk); e.g. ATB
 TODO bind volume control, playpause, next, other commands, let user select from dropdown?
 TODO improve track display
 
+http://stackoverflow.com/questions/2952298/how-can-i-truncate-an-nsstring-to-a-set-length
+
+http://stackoverflow.com/questions/5386351/objective-c-code-to-right-pad-a-nsstring
+
 
 ------------------------------------------------------------------------
 

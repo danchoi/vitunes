@@ -13,13 +13,28 @@ static iTunesPlaylist *libraryPlaylist;
 static iTunesSource *library;
 
 NSString *formatTrackForDisplay(iTunesTrack *track) {
-  return [NSString stringWithFormat: @"%d %@ %@ %@ (%d) %@", 
-          track.databaseID,
-          track.name,
-          track.album,
-          track.artist,
-          track.year,
-          track.genre];
+  NSString *artist = [track.artist stringByPaddingToLength:20 withString:@" " startingAtIndex:0];
+  NSString *name = [track.name stringByPaddingToLength:30 withString:@" " startingAtIndex:0];
+  NSString *genre = [track.genre stringByPaddingToLength:20 withString:@" " startingAtIndex:0];
+  NSString *time = [track.time stringByPaddingToLength:7 withString:@" " startingAtIndex:0];
+  NSString *kind = [track.kind stringByPaddingToLength:29 withString:@" " startingAtIndex:0];
+  NSString *year;
+  if (track.year != 0) {
+    year = [NSString stringWithFormat:@"%d", track.year];
+  } else {
+    year = @"    ";
+  }
+  NSString *album = [track.album stringByPaddingToLength:30 withString:@" " startingAtIndex:0];
+  return [NSString stringWithFormat: @"%@ | %@ | %@ | %@ | %@ | %@ | %@ | %d", 
+          artist,
+          name,
+          album,
+          year,
+          genre,
+          time,
+          kind,
+          track.databaseID
+            ];
 }
 
 SBElementArray *search(NSArray *args)  {
