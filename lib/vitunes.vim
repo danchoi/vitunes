@@ -1,8 +1,7 @@
 " Vim script that add ability to search and play iTunes tracks from Vim
 " Maintainer:	Daniel Choi <dhchoi@gmail.com>
 " License: MIT License (c) 2011 Daniel Choi
-
-
+"
 " uncomment for production
 " let s:vitunes_tool = 'vitunes'
 " development build of command line tool
@@ -30,17 +29,18 @@ function! ViTunes()
   setlocal textwidth=0
   setlocal buftype=nofile
   let maplocalleader=','
-  noremap <buffer> <LocalLeader>s <Esc>:call <SID>openQueryWindow()<cr>
-  noremap <buffer> <LocalLeader>p <Esc>:call <SID>openPlaylistDropdown()<cr>
-  noremap <buffer> <LocalLeader>a <Esc>:call <SID>openArtistDropdown()<cr>
-  noremap <buffer> <LocalLeader>g <Esc>:call <SID>openGenreDropdown()<cr>
-  noremap <buffer> <LocalLeader>A <Esc>:call <SID>openAlbumDropdown()<cr>
-  noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
+  noremap <buffer> <LocalLeader>s :call <SID>openQueryWindow()<cr>
+  noremap <buffer> <LocalLeader>p :call <SID>openPlaylistDropdown()<cr>
+  noremap <buffer> <LocalLeader>a :call <SID>openArtistDropdown()<cr>
+  noremap <buffer> <LocalLeader>g :call <SID>openGenreDropdown()<cr>
+  noremap <buffer> <LocalLeader>A :call <SID>openAlbumDropdown()<cr>
+  "noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
+  noremap <buffer> <cr> :call <SID>playTrack()<cr>
+  setlocal nomodifiable
 endfunction
 
 function! s:playTrack()
   let trackID = matchstr(getline(line('.')), '^\d\+')
-  echo trackID
   call system(s:vitunes_tool . "playTrackID " . trackID)
 endfunc
 
@@ -161,9 +161,11 @@ function! s:submitQueryOrSelection(command)
   end
   echom bcommand
   let res = split(system(bcommand), '\n')
-  1,$delete
-  put =res
-  1delete
+  setlocal modifiable
+  silent! 1,$delete
+  silent! put =res
+  silent! 1delete
+  setlocal nomodifiable
 endfunction
 
 nnoremap <silent> <leader>it :call ViTunes()<cr>
