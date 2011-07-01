@@ -29,7 +29,7 @@ function! ViTunes()
   leftabove split ViTunesBuffer
   setlocal textwidth=0
   setlocal buftype=nofile
-  let maplocalleader = ','
+  let maplocalleader=','
   noremap <buffer> <LocalLeader>s <Esc>:call <SID>openQueryWindow()<cr>
   noremap <buffer> <LocalLeader>p <Esc>:call <SID>openPlaylistDropdown()<cr>
   noremap <buffer> <LocalLeader>a <Esc>:call <SID>openArtistDropdown()<cr>
@@ -51,9 +51,10 @@ function! s:openQueryWindow()
   setlocal noswapfile
   setlocal modifiable
   resize 1
-  inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('search')<CR> 
-  noremap <buffer> q <Esc>:close<cr>
-  inoremap <buffer> <Esc> <Esc>:close<cr>
+  inoremap <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('search')<cr>
+  noremap <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('search')<cr>
+  noremap <buffer> q <Esc>:close
+  inoremap <buffer> <Esc> <Esc>:close
   call setline(1, s:searchPrompt)
   normal $
   call feedkeys("a", "t")
@@ -140,9 +141,13 @@ endfunction
 
 " selection window pick or search window query
 function! s:submitQueryOrSelection(command)
-  let query = get(split(getline('.'), ': '), 1)
+  if (getline('.') =~ '^\s*$')
+    close
+    return
+  endif
+  let query = get(split(getline('.'), ':\s*'), 1)
   close
-  if (len(query) == 0)
+  if (query =~ '^\s*$')
     return
   endif
   if a:command == 'artist'
