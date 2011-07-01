@@ -79,7 +79,7 @@ added to the end of the playlist.
 
 ## How to contact the developer
 
-My name is Daniel Choi. I specialize in Ruby, Railas, MySQL, PostgreSQL, and
+My name is Daniel Choi. I specialize in Ruby, Rails, MySQL, PostgreSQL, and
 iOS development. I am based in Cambridge, Massachusetts, USA, and my little
 software company is called Kaja Software. 
 
