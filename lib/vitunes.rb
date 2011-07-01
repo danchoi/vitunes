@@ -12,6 +12,7 @@ class ViTunes
 
   def self.help
     readme = File.expand_path("../../README", __FILE__)
+    File.read(readme)
   end
 end
 
