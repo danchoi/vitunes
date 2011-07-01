@@ -28,6 +28,9 @@ Then
 `vitunes-install` installs a Vim plugin into your ~/.vim/plugin
 directory. 
 
+If you get an error message saying that vitunes-install is missing, then you probably have
+a `PATH` issue. Put the directory where Rubygems install executable on your `PATH`.
+
 ## How to use it 
 
 ### General commands
