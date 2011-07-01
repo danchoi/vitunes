@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 static iTunesApplication *iTunes;
-static iTunesPlaylist *music;
+static iTunesPlaylist *libraryPlaylist; 
 static iTunesSource *library;
 
 NSString *formatTrackForDisplay(iTunesTrack *track) {
@@ -24,7 +24,7 @@ NSString *formatTrackForDisplay(iTunesTrack *track) {
 
 SBElementArray *search(NSArray *args)  {
   NSString *query = [args componentsJoinedByString:@" "];
-  return [music searchFor:query only:iTunesESrAAll];
+  return [libraryPlaylist searchFor:query only:iTunesESrAAll];
 }
 
 void playTrackID(NSString *trackID) {
@@ -32,7 +32,7 @@ void playTrackID(NSString *trackID) {
   [f setNumberStyle:NSNumberFormatterDecimalStyle];
   NSNumber *databaseId = [f numberFromString:trackID];
   [f release];
-  NSArray *xs = [[music tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"databaseID == %@", databaseId]];
+  NSArray *xs = [[libraryPlaylist tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"databaseID == %@", databaseId]];
   iTunesTrack* t = [xs objectAtIndex:0];
   NSLog(@"Playing track: %@", [t name]);
   [t playOnce:true]; // false would play next song on list after this one finishes
@@ -41,7 +41,7 @@ void playTrackID(NSString *trackID) {
 void groupTracksBy(NSString *property) {
   // e.g. artist, genre
   // year won't work yet
-  NSArray *results = [[[music tracks] arrayByApplyingSelector:NSSelectorFromString(property)]
+  NSArray *results = [[[libraryPlaylist tracks] arrayByApplyingSelector:NSSelectorFromString(property)]
     filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"%@ != ''", property]];
   for (NSString *s in results) {
     printf("%s\n", [s cStringUsingEncoding: NSUTF8StringEncoding]);
@@ -72,7 +72,7 @@ void playPlaylist(NSString *playlistName) {
 
 void tracksMatchingPredicate(NSString *predString) {
   // predicate can be something like "artist == 'U2'"
-  NSArray *tracks = [[music tracks] 
+  NSArray *tracks = [[libraryPlaylist tracks] 
     filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:predString]];
   printTracks(tracks);
 }
@@ -115,7 +115,7 @@ int main (int argc, const char * argv[]) {
   }
   iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
   library = [[iTunes sources] objectWithName:@"Library"];
-  music = [[library playlists] objectWithName:@"Music"];
+  libraryPlaylist = [[library playlists] objectWithName:@"Library"];
 
   if ([action isEqual: @"search"]) {
     printTracks(search(args));
