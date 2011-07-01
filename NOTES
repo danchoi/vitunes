@@ -208,7 +208,10 @@ TODO -- handle case of missing Track (not on disk); e.g. ATB
 TODO bind volume control, playpause, next, other commands, let user select from dropdown?
 TODO improve track display
 
-TODO LATER sort title -- not urgent
+
+------------------------------------------------------------------------
+
+TODO LATER use sortTitle -- not urgent
 
 
 

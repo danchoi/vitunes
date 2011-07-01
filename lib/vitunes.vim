@@ -2,7 +2,6 @@
 " Maintainer:	Daniel Choi <dhchoi@gmail.com>
 " License: MIT License (c) 2011 Daniel Choi
 
-let mapleader = ','
 
 " uncomment for production
 " let s:vitunes_tool = 'vitunes'
@@ -30,11 +29,12 @@ function! ViTunes()
   leftabove split ViTunesBuffer
   setlocal textwidth=0
   setlocal buftype=nofile
-  noremap <buffer> <leader>s <Esc>:call <SID>openQueryWindow()<cr>
-  noremap <buffer> <leader>p <Esc>:call <SID>openPlaylistDropdown()<cr>
-  noremap <buffer> <leader>a <Esc>:call <SID>openArtistDropdown()<cr>
-  noremap <buffer> <leader>g <Esc>:call <SID>openGenreDropdown()<cr>
-  noremap <buffer> <leader>A <Esc>:call <SID>openAlbumDropdown()<cr>
+  let maplocalleader = ','
+  noremap <buffer> <LocalLeader>s <Esc>:call <SID>openQueryWindow()<cr>
+  noremap <buffer> <LocalLeader>p <Esc>:call <SID>openPlaylistDropdown()<cr>
+  noremap <buffer> <LocalLeader>a <Esc>:call <SID>openArtistDropdown()<cr>
+  noremap <buffer> <LocalLeader>g <Esc>:call <SID>openGenreDropdown()<cr>
+  noremap <buffer> <LocalLeader>A <Esc>:call <SID>openAlbumDropdown()<cr>
   noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
 endfunction
 
