@@ -2,6 +2,17 @@
 
 ViTunes lets you control and navigate iTunes from the comfort of Vim.
 
+<a href="images-vitunes/bowie.png" rel="lightbox[screens]"><img src="images-vitunes/bowie-sm.png" /></a>
+<a href="images-vitunes/select-artist.png" rel="lightbox[screens]"><img src="images-vitunes/select-artist-sm.png" /></a>
+<a href="images-vitunes/select-playlist.png" rel="lightbox[screens]"><img src="images-vitunes/select-playlist-sm.png" /></a>
+
+Benefits:
+
+* control iTunes without leaving Vim, where the work happens
+* avoid using the mouse or trackpad; keystrokes get you there faster
+* control iTunes running on a remote computer 
+* let multiple people control one instance of iTunes over ssh
+
 ## Prerequisites
 
 * Ruby 1.8.6 or higher (developed on Ruby 1.9.2)
@@ -11,6 +22,8 @@ ViTunes lets you control and navigate iTunes from the comfort of Vim.
 ## Install
 
     gem install vitunes
+
+Then
 
     vitunes-install
 
@@ -63,3 +76,18 @@ Press `ENTER` or `ESC` to exit drop down selection mode.
 To copy tracks, put the cursor on a track or select a range of tracks,
 and then hit `,c` to select a playlist to copy them to. The tracks will be
 added to the end of the playlist.
+
+## How to contact the developer
+
+My name is Daniel Choi. I specialize in Ruby, MySQL, PostgreSQl, and iOS
+development. I am based in Cambridge, Massachusetts, USA, and my little
+software company is called Kaja Software. 
+
+* Company Email: info@kajasoftware.com
+* Twitter: [@danchoi][twitter] 
+* Personal Email: dhchoi@gmail.com  
+* My Homepage: <http://danielchoi.com/software>
+
+[twitter]:http://twitter.com/#!/danchoi
+
+

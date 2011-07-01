@@ -32,15 +32,15 @@ task :web => :build_webpage do
     `rsync -avz out/stylesheets zoe2@instantwatcher.com:~/danielchoi.com/public/software/`
     `rsync -avz out/lightbox2 zoe2@instantwatcher.com:~/danielchoi.com/public/software/`
   end
-  `open http://danielchoi.com/software/vitunes.html`
+  #`open http://danielchoi.com/software/vitunes.html`
 end
 
 desc "build webpage"
 task :build_webpage do
   `cp README.markdown ../project-webpages/src/vitunes.README.markdown`
   Dir.chdir "../project-webpages" do
-    puts `ruby gen.rb vitunes #{Vmail::VERSION}`
-    #`open out/vitunes.html`
+    puts `ruby gen.rb vitunes #{ViTunes::VERSION}`
+    `open out/vitunes.html`
   end
 end
 
