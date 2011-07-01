@@ -2,11 +2,15 @@
 " Maintainer:	Daniel Choi <dhchoi@gmail.com>
 " License: MIT License (c) 2011 Daniel Choi
 "
-" uncomment for production
-" let s:vitunes_tool = 'vitunes'
-" development build of command line tool
-"let s:vitunes_tool = '/Users/choi/projects/vitunes/build/Release/vitunes '
-let s:vitunes_tool = '/Users/choi/projects/vitunes/bin/vitunes-tool '
+" Buid this path with plugin install program
+
+if exists("g:vitunes_tool")
+  let s:vitunes_tool = g:vitunes_tool
+else
+  " This is the development version (specific to D Choi's setup)
+  " Maybe I should make this a relative path
+  let s:vitunes_tool = '/Users/choi/projects/vitunes/lib/vitunes-tool-objc '
+endif
 
 let s:searchPrompt = "Search iTunes Music Library: "
 let s:getPlaylistsCommand = s:vitunes_tool . "playlists"
@@ -91,8 +95,8 @@ function! s:help()
   " This should just display the README
   set modifiable
   silent! 1,$delete
-  silent! put ="HELO another line"
-  silent! put ="2HELO another line"
+  let res = system("vitunes-help") 
+  silent! put =res
   silent! 1delete
   set nomodifiable
 endfunction

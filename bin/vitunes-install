@@ -7,3 +7,4 @@ rescue LoadError
 end
 
 ViTunes.install_vim_plugin
+puts "Installed vitunes.vim into your ~/.vim/plugin directory"

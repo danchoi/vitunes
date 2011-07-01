@@ -5,5 +5,6 @@
 if exists("g:ViTunesLoaded") || &cp || version < 700
   finish
 endif
+let g:vitunes_tool = <%= vitunes_tool_path %>
 source <%= vimscript_file %>
 
