@@ -25,7 +25,7 @@ func! s:trimString(string)
 endfunc
 
 
-" the search match window
+" the main window
 function! ViTunes()
   leftabove split ViTunesBuffer
   setlocal textwidth=0
@@ -37,8 +37,6 @@ function! ViTunes()
   noremap <buffer> <leader>A <Esc>:call <SID>openAlbumDropdown()<cr>
   noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
 endfunction
-
-
 
 function! s:playTrack()
   let trackID = matchstr(getline(line('.')), '^\d\+')
