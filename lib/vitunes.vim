@@ -68,10 +68,24 @@ function! ViTunes()
   " Not working yet
   " noremap <buffer> <BS> :call <SID>deleteTracksFromPlaylist()<CR> "
   noremap <buffer> ,q :close<CR>
+  noremap <buffer> ? :call <SID>help()<CR>
   "noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
   noremap <buffer> <cr> :call <SID>playTrack()<cr>
   setlocal nomodifiable
 endfunction
+
+function! s:help()
+  " TODO show command list
+  " call a Ruby executable that comes with the gem
+  " This should just display the README
+  set modifiable
+  silent! 1,$delete
+  silent! put ="HELO another line"
+  silent! put ="2HELO another line"
+  silent! 1delete
+  set nomodifiable
+endfunction
+
 
 function! s:itunesControl(command)
   let res = s:runCommand(s:vitunes_tool . "itunes ".a:command)
