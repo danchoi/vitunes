@@ -66,7 +66,8 @@ function! ViTunes()
 
   noremap <buffer> > :call <SID>nextTrack()<cr>
   noremap <buffer> < :call <SID>prevTrack()<cr>
-  noremap <buffer> .  :call <SID>itunesControl("currentTrack")<cr>
+  
+  noremap <buffer> .  :call <SID>currentTrackAndPlaylist()<cr>
 
   noremap <buffer> <Space>  :call <SID>itunesControl("playpause")<cr>
   noremap <buffer> -  :call <SID>changeVolume("volumeDown")<cr>
@@ -148,6 +149,12 @@ function! s:prevTrack()
     call s:playTrack()
     " call s:itunesControl("previousTrack")
   endif
+endfunction
+
+function! s:currentTrackAndPlaylist()
+  let res1 = s:runCommand(s:vitunes_tool . "itunes currentTrack")
+  let res2 = s:runCommand(s:vitunes_tool . "itunes currentPlaylist")
+  echo res1 . '  |  '.res2
 endfunction
 
 function! s:openQueryWindow()

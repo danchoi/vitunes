@@ -192,12 +192,19 @@ void itunes(NSString *command) {
           printf("No current track");
           return;
         }
-         s = [NSString stringWithFormat:@"\"%@\" by %@ from %@",
+        s = [NSString stringWithFormat:@"\"%@\" by %@ from %@",
            [((iTunesTrack *)result) name],
            [((iTunesTrack *)result) artist],
            [((iTunesTrack *)result) album]
-         ];
-         printf("Current track: %s", [s cStringUsingEncoding: NSUTF8StringEncoding]);
+        ];
+        printf("Current track: %s", [s cStringUsingEncoding: NSUTF8StringEncoding]);
+      } else if ([[result className] isEqual:@"ITunesPlaylist"]) {
+        if ([result name ] == nil) {
+          printf("No current playlist");
+          return;
+        }
+        s = [NSString stringWithFormat:@"%@", [((iTunesPlaylist *)result) name]];
+        printf("Current playlist: %s", [s cStringUsingEncoding: NSUTF8StringEncoding]);
       } else {
         s = ((iTunesItem *)result).name;
         printf("%s\n", [s cStringUsingEncoding: NSUTF8StringEncoding]);
