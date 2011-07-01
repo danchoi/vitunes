@@ -64,8 +64,8 @@ function! ViTunes()
   noremap <buffer> ,A :call <SID>openAlbumDropdown()<cr>
   noremap <buffer> ,c :call <SID>openAddToPlaylistDropDown()<cr>
 
-  noremap <buffer> > :call <SID>itunesControl("nextTrack")<cr>
-  noremap <buffer> < :call <SID>itunesControl("previousTrack")<cr>
+  noremap <buffer> > :call <SID>nextTrack()<cr>
+  noremap <buffer> < :call <SID>prevTrack()<cr>
   noremap <buffer> .  :call <SID>itunesControl("currentTrack")<cr>
 
   noremap <buffer> <Space>  :call <SID>itunesControl("playpause")<cr>
@@ -75,7 +75,7 @@ function! ViTunes()
 
   " Not working yet
   " noremap <buffer> <BS> :call <SID>deleteTracksFromPlaylist()<CR> "
-  noremap <buffer> ,q :close<CR>
+  noremap <buffer> ,i :close<CR>
   noremap <buffer> ? :call <SID>help()<CR>
   "noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
   noremap <buffer> <cr> :call <SID>playTrack()<cr>
@@ -120,6 +120,35 @@ function! s:playTrack()
   " echom command
   call system(command)
 endfunc
+
+function! s:hasTrackID(line)
+  if a:line > line('$')
+    return 0
+  end
+  let res = matchstr(getline(a:line), '\d\+$')
+  if res != ''
+    return 1
+  else
+    return 0
+  end
+endfunction
+
+" move up or down the visible list of tracks
+function! s:nextTrack()
+  if s:hasTrackID(line('.') + 1)
+    normal j
+    call s:playTrack()
+    " call s:itunesControl("nextTrack")
+  endif
+endfunction
+
+function! s:prevTrack()
+  if s:hasTrackID(line('.') - 1)
+    normal k
+    call s:playTrack()
+    " call s:itunesControl("previousTrack")
+  endif
+endfunction
 
 function! s:openQueryWindow()
   leftabove split SearchTracks
