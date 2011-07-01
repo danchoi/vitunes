@@ -201,3 +201,6 @@ tracks list
 - select a track to play. if playlist, start playing continuously
 
 
+TODO -- handle case of missing Track (not on disk)
+
+

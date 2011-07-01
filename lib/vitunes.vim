@@ -13,6 +13,13 @@ let s:search_prompt = "Search iTunes Music Library: "
 let s:getPlaylistsCommand = s:vitunes_tool . "playlists"
 let s:selectPlaylistPrompt = "Select playlist: "
 
+
+func! s:trimString(string)
+  let string = substitute(a:string, '\s\+$', '', '')
+  return substitute(string, '^\s\+', '', '')
+endfunc
+
+
 " the search match window
 function! ViTunes()
   leftabove split ViTunesBuffer
@@ -21,7 +28,6 @@ function! ViTunes()
   noremap <buffer> <leader>s <Esc>:call <SID>openQueryWindow()<cr>
   noremap <buffer> <leader>p <Esc>:call <SID>openPlaylistDropdown()<cr>
   noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
-  call <SID>openQueryWindow()
 endfunction
 
 
@@ -39,7 +45,7 @@ function! s:openQueryWindow()
   setlocal noswapfile
   setlocal modifiable
   resize 1
-  inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQuery()<CR> 
+  inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('search')<CR> 
   noremap <buffer> q <Esc>:close<cr>
   inoremap <buffer> <Esc> <Esc>:close<cr>
   call setline(1, s:search_prompt)
@@ -60,12 +66,13 @@ function! s:openPlaylistDropdown()
   setlocal noswapfile
   setlocal modifiable
   resize 1
-  inoremap <silent> <buffer> <cr> <Esc>:call <SID>selectPlaylist()<CR> 
+  inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('playlistTracks')<CR> 
   noremap <buffer> q <Esc>:close<cr>
   inoremap <buffer> <Esc> <Esc>:close<cr>
   call setline(1, s:selectPlaylistPrompt)
   normal $
-  call feedkeys("a", "t")
+  let s:playlists = split(system(s:getPlaylistsCommand), '\n')
+  call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
 endfunction
 
 function! PlaylistCompletion(findstart, base)
@@ -75,13 +82,12 @@ function! PlaylistCompletion(findstart, base)
     return start
   else
     if (a:base == '')
-      let playlists = system(s:getPlaylistsCommand . ' ' . a:base)
-      return split(playlists, '\n')
+      return s:playlists
     else
       let res = []
       " find tracks matching a:base
-      let playlists = split(system(s:getPlaylistsCommand . ' ' . a:base), '\n')
       for m in s:playlists
+        " why doesn't case insensitive flag work?
         if m =~ '\c' . a:base 
           call add(res, m)
         endif
@@ -90,14 +96,6 @@ function! PlaylistCompletion(findstart, base)
     endif
   endif
 endfun
-
-" turn this into more general func
-function! s:selectPlaylist()
-  let playlistName = get(split(getline(line('.')), ': '), 1)
-  close
-  echom playlistName
-
-endfunction
 
 "  By Artist 
 
@@ -108,16 +106,15 @@ endfunction
 "  Search query
 
 
-"
-" selection window pick
-function! s:submitQuery()
-  let query = getline('.')[len(s:search_prompt) - 1:]
+" selection window pick or search window query
+function! s:submitQueryOrSelection(command)
+  let query = get(split(getline('.'), ': '), 1)
   close
-  if (query == '') " no selection
+  if (len(query) == 0)
     return
-  end
-  let res = split(system(s:vitunes_tool . ' search ' . query), '\n')
-  echo res
+  endif
+  let command = s:vitunes_tool . a:command . ' ' . query
+  let res = split(system(command), '\n')
   1,$delete
   put =res
   1delete
