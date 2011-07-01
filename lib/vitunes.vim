@@ -12,6 +12,8 @@ let s:vitunes_tool = '/Users/choi/projects/vitunes/build/Release/vitunes '
 let s:searchPrompt = "Search iTunes Music Library: "
 let s:getPlaylistsCommand = s:vitunes_tool . "playlists"
 let s:selectPlaylistPrompt = "Select playlist: "
+let s:getArtistsCommand = s:vitunes_tool . "group artist"
+let s:selectArtistPrompt = "Select artist: "
 
 func! s:trimString(string)
   let string = substitute(a:string, '\s\+$', '', '')
@@ -26,6 +28,7 @@ function! ViTunes()
   setlocal buftype=nofile
   noremap <buffer> <leader>s <Esc>:call <SID>openQueryWindow()<cr>
   noremap <buffer> <leader>p <Esc>:call <SID>openPlaylistDropdown()<cr>
+  noremap <buffer> <leader>a <Esc>:call <SID>openArtistDropdown()<cr>
   noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
 endfunction
 
@@ -100,6 +103,16 @@ function! s:openPlaylistDropdown()
 endfunction
 
 "  By Artist 
+function! s:openArtistDropdown()
+  leftabove split ChoosePlaylist
+  inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('artist')<CR> 
+  call setline(1, s:selectArtistPrompt)
+  call <SID>commonDropDownConfig()
+  let s:selectionList = split(system(s:getArtistsCommand), '\n')
+  let s:selectionPrompt = s:selectArtistPrompt
+  call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
+endfunction
+
 
 
 "  By Genre 
@@ -115,8 +128,17 @@ function! s:submitQueryOrSelection(command)
   if (len(query) == 0)
     return
   endif
-  let command = s:vitunes_tool . a:command . ' ' . query
-  let res = split(system(command), '\n')
+  if a:command == 'artist'
+    let bcommand = s:vitunes_tool."predicate \"artist == '".query."'\""
+  elseif a:command == 'genre'
+    let bcommand = s:vitunes_tool."predicate \"genre == '".query."'\""
+  elseif a:command == 'album'
+    let bcommand = s:vitunes_tool."predicate \"album == '".query."'\""
+  else
+    let bcommand = s:vitunes_tool . a:command . ' ' . query
+  end
+  echom bcommand
+  let res = split(system(bcommand), '\n')
   1,$delete
   put =res
   1delete

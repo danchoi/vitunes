@@ -40,7 +40,7 @@ void playTrackID(NSString *trackID) {
 }
 
 void groupTracksBy(NSString *property) {
-  // e.g. artist, genre
+  // gets list of all e.g. artists, genres
   // NOTE year won't work yet
   // NOTE pipe the output through uniq and sort --ignore-case
   NSArray *results = [[[libraryPlaylist tracks] arrayByApplyingSelector:NSSelectorFromString(property)]
