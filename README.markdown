@@ -29,7 +29,7 @@ Then
 directory. 
 
 If you get an error message saying that vitunes-install is missing, then you probably have
-a `PATH` issue. Put the directory where Rubygems install executable on your `PATH`.
+a `PATH` issue. Put the directory where Rubygems installs executable on your `PATH`.
 
 ## How to use it 
 
