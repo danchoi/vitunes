@@ -9,6 +9,10 @@ class ViTunes
     `mkdir -p #{ENV['HOME']}/.vim/plugin`
     File.open("#{ENV['HOME']}/.vim/plugin/vitunes.vim", "w") {|f| f.write plugin_body}
   end
+
+  def self.help
+    readme = File.expand_path("../../README", __FILE__)
+  end
 end
 
 if __FILE__ == $0

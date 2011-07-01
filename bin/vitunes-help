@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+begin
+  require 'vitunes'
+rescue LoadError
+  require 'rubygems'
+  require 'vitunes'
+end
+
+
+puts ViTunes.help

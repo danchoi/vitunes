@@ -13,11 +13,8 @@ sinatra working
 Vimscript can remember the last command send to system() and just append
 an index number to it
 
-
-
 Store lists like in Vmail
 Put databaseID off screen and use it to look up anything
-
 
 
 https://bitbucket.org/kamitchell/itunesbridged
