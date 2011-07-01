@@ -89,7 +89,12 @@ function! ViTunes()
   setlocal statusline=%!ViTunesStatusLine()
 
   if line('$') == 1 " buffer empty
-    call s:help()
+    let msg = "Welcome to ViTunes\n\nPress ? for help"
+    setlocal modifiable
+    silent! 1,$delete
+    silent! put =msg
+    silent! 1delete
+    setlocal nomodifiable
   endif
 endfunction
 

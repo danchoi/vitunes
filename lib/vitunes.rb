@@ -19,7 +19,7 @@ class ViTunes
 
   def self.help
     readme = File.expand_path("../../README.markdown", __FILE__)
-    File.read(readme)
+    help = "ViTunes help\n\n" + File.read(readme).split("## How to use it")[1].strip
   end
 end
 
