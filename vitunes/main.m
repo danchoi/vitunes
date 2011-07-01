@@ -54,6 +54,20 @@ void playTrackID(NSString *trackID) {
   [t playOnce:true]; // false would play next song on list after this one finishes
 }
 
+void playTrackIDFromPlaylist(NSString *trackID, NSString *playlistName) {
+  NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+  [f setNumberStyle:NSNumberFormatterDecimalStyle];
+  NSNumber *databaseId = [f numberFromString:trackID];
+  [f release];
+  iTunesPlaylist *playlist =  [[library playlists] objectWithName:playlistName];
+  NSArray *xs = [[playlist tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"databaseID == %@", databaseId]];
+  iTunesTrack* t = [xs objectAtIndex:0];
+  NSLog(@"Playing track: %@ from playlist: %@", [t name], playlistName);
+  // TODO report a missing track?
+  [t playOnce:false]; // play playlist continuously
+}
+
+
 void groupTracksBy(NSString *property) {
   // gets list of all e.g. artists, genres
   // NOTE year won't work yet
@@ -139,6 +153,8 @@ int main (int argc, const char * argv[]) {
     printTracks(search(args));
   } else if ([action isEqual: @"playTrackID"]) { 
     playTrackID([args objectAtIndex:0]);
+  } else if ([action isEqual: @"playTrackIDFromPlaylist"]) { 
+    playTrackIDFromPlaylist([args objectAtIndex:0], [args objectAtIndex:1]);
   } else if ([action isEqual: @"group"]) {
     groupTracksBy([args objectAtIndex:0]);
   } else if ([action isEqual: @"predicate"]) {

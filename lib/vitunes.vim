@@ -17,6 +17,8 @@ let s:selectGenrePrompt = "Select genre: "
 let s:getAlbumsCommand = s:vitunes_tool . "group album | uniq "
 let s:selectAlbumPrompt = "Select album: "
 
+let s:currentPlaylist = ''
+
 func! s:trimString(string)
   let string = substitute(a:string, '\s\+$', '', '')
   return substitute(string, '^\s\+', '', '')
@@ -45,7 +47,14 @@ endfunction
 
 function! s:playTrack()
   let trackID = matchstr(getline(line('.')), '\d\+$')
-  call system(s:vitunes_tool . "playTrackID " . trackID)
+  let command = ""
+  if (s:currentPlaylist != '')
+    let command = s:vitunes_tool . "playTrackIDFromPlaylist ".trackID.' '.s:currentPlaylist
+  else
+    let command = s:vitunes_tool . "playTrackID " . trackID
+  endif
+  " echom command
+  call system(command)
 endfunc
 
 function! s:openQueryWindow()
@@ -174,6 +183,12 @@ function! s:submitQueryOrSelection(command)
   silent! put =res
   silent! 1delete
   setlocal nomodifiable
+
+  if (a:command == 'playlistTracks')
+    let s:currentPlaylist = query
+  else
+    let s:currentPlaylist = ''
+  endif
 endfunction
 
 nnoremap <silent> <leader>it :call ViTunes()<cr>
