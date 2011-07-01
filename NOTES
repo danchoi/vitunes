@@ -203,4 +203,6 @@ tracks list
 
 TODO -- handle case of missing Track (not on disk)
 
+**** TODO -- allow  playTrack to search all library, not just music!
+
 

@@ -77,20 +77,25 @@ endfun
 
 " Navigation
 
-"  By Playlists 
-function! s:openPlaylistDropdown()
-  leftabove split ChoosePlaylist
+function! s:commonDropDownConfig()
   setlocal textwidth=0
   setlocal completefunc=GenericCompletion
   setlocal buftype=nofile
   setlocal noswapfile
   setlocal modifiable
   resize 1
-  inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('playlistTracks')<CR> 
   noremap <buffer> q <Esc>:close<cr>
   inoremap <buffer> <Esc> <Esc>:close<cr>
-  call setline(1, s:selectPlaylistPrompt)
   normal $
+endfunction
+
+
+"  By Playlists 
+function! s:openPlaylistDropdown()
+  leftabove split ChoosePlaylist
+  inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('playlistTracks')<CR> 
+  call setline(1, s:selectPlaylistPrompt)
+  call <SID>commonDropDownConfig()
   let s:selectionList = split(system(s:getPlaylistsCommand), '\n')
   let s:selectionPrompt = s:selectPlaylistPrompt
   call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
