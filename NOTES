@@ -204,10 +204,10 @@ tracks list
 - select a track to play. if IN playlist, start playing continuously
 
 TODO 
-- go back to last playlist or put it at top
-- on startup, load contents of current playlist?
-- documentation
+- on startup, show help page
+- documentation - ruby command in gem
 - when installing gem, print message to run installer for vim plugin
+- screenshots
 
 ------------------------------------------------------------------------
 LATER
