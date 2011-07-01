@@ -5,7 +5,8 @@
 " uncomment for production
 " let s:vitunes_tool = 'vitunes'
 " development build of command line tool
-let s:vitunes_tool = '/Users/choi/projects/vitunes/build/Release/vitunes '
+"let s:vitunes_tool = '/Users/choi/projects/vitunes/build/Release/vitunes '
+let s:vitunes_tool = '/Users/choi/projects/vitunes/bin/vitunes-tool '
 
 let s:searchPrompt = "Search iTunes Music Library: "
 let s:getPlaylistsCommand = s:vitunes_tool . "playlists"
@@ -120,6 +121,7 @@ function! s:playTrack()
   endif
   " echom command
   call system(command)
+  call s:currentTrackAndPlaylist()
 endfunc
 
 function! s:hasTrackID(line)
