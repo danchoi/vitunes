@@ -42,11 +42,11 @@ void playTrackID(NSString *trackID) {
 void groupTracksBy(NSString *property) {
   // gets list of all e.g. artists, genres
   // NOTE year won't work yet
-  // NOTE pipe the output through uniq and sort --ignore-case
+  // NOTE pipe the output through uniq 
   NSArray *results = [[[libraryPlaylist tracks] arrayByApplyingSelector:NSSelectorFromString(property)]
     filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"%@ != ''", property]];
-
-  for (NSString *s in results) {
+  NSArray *sortedResults = [results sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+  for (NSString *s in sortedResults) {
     printf("%s\n", [s cStringUsingEncoding: NSUTF8StringEncoding]);
   }
 }

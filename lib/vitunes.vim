@@ -10,11 +10,11 @@ let s:vitunes_tool = '/Users/choi/projects/vitunes/build/Release/vitunes '
 let s:searchPrompt = "Search iTunes Music Library: "
 let s:getPlaylistsCommand = s:vitunes_tool . "playlists"
 let s:selectPlaylistPrompt = "Select playlist: "
-let s:getArtistsCommand = s:vitunes_tool . "group artist"
+let s:getArtistsCommand = s:vitunes_tool . "group artist | uniq "
 let s:selectArtistPrompt = "Select artist: "
-let s:getGenresCommand = s:vitunes_tool . "group genre"
+let s:getGenresCommand = s:vitunes_tool . "group genre | uniq "
 let s:selectGenrePrompt = "Select genre: "
-let s:getAlbumsCommand = s:vitunes_tool . "group album"
+let s:getAlbumsCommand = s:vitunes_tool . "group album | uniq "
 let s:selectAlbumPrompt = "Select album: "
 
 func! s:trimString(string)
@@ -28,12 +28,11 @@ function! ViTunes()
   leftabove split ViTunesBuffer
   setlocal textwidth=0
   setlocal buftype=nofile
-  let maplocalleader=','
-  noremap <buffer> <LocalLeader>s :call <SID>openQueryWindow()<cr>
-  noremap <buffer> <LocalLeader>p :call <SID>openPlaylistDropdown()<cr>
-  noremap <buffer> <LocalLeader>a :call <SID>openArtistDropdown()<cr>
-  noremap <buffer> <LocalLeader>g :call <SID>openGenreDropdown()<cr>
-  noremap <buffer> <LocalLeader>A :call <SID>openAlbumDropdown()<cr>
+  noremap <buffer> ,s :call <SID>openQueryWindow()<cr>
+  noremap <buffer> ,p :call <SID>openPlaylistDropdown()<cr>
+  noremap <buffer> ,a :call <SID>openArtistDropdown()<cr>
+  noremap <buffer> ,g :call <SID>openGenreDropdown()<cr>
+  noremap <buffer> ,A :call <SID>openAlbumDropdown()<cr>
   "noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
   noremap <buffer> <cr> :call <SID>playTrack()<cr>
   setlocal nomodifiable
@@ -54,7 +53,8 @@ function! s:openQueryWindow()
   inoremap <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('search')<cr>
   noremap <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('search')<cr>
   noremap <buffer> q <Esc>:close
-  inoremap <buffer> <Esc> <Esc>:close
+  inoremap <buffer> <Esc> <Esc>:close<CR>
+  noremap <buffer> <Esc> <Esc>:close<CR>
   call setline(1, s:searchPrompt)
   normal $
   call feedkeys("a", "t")
@@ -63,7 +63,7 @@ endfunction
 function! GenericCompletion(findstart, base)
   if a:findstart
     let prompt = s:selectionPrompt
-    let start = len(prompt) + 1
+    let start = len(prompt) 
     return start
   else
     if (a:base == '')
@@ -147,7 +147,8 @@ function! s:submitQueryOrSelection(command)
   endif
   let query = get(split(getline('.'), ':\s*'), 1)
   close
-  if (query =~ '^\s*$')
+  " echom query
+  if (len(query) == 0 || query =~ '^\s*$')
     return
   endif
   if a:command == 'artist'
