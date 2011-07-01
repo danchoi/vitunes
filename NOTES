@@ -154,7 +154,7 @@ predicate "name contains 'love'"
 itunes currentTrack => print current track with smae formatting for
   listed tracks
 
-playPlaylits Purchased
+playPlaylist Purchased
 playlistTracks Purchased
 
 group artist
