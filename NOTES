@@ -202,11 +202,11 @@ tracks list
 
 TODO -- handle case of missing Track (not on disk); e.g. ATB
 
-TODO -- ARTISTS and GENRE lists
 TODO bind volume control, playpause, next, 
 other commands, let user select from dropdown?
 TODO improve track display
 
+TODO LATER sort title -- no urgent
 
 
 

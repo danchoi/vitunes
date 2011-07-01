@@ -16,6 +16,8 @@ let s:getArtistsCommand = s:vitunes_tool . "group artist"
 let s:selectArtistPrompt = "Select artist: "
 let s:getGenresCommand = s:vitunes_tool . "group genre"
 let s:selectGenrePrompt = "Select genre: "
+let s:getAlbumsCommand = s:vitunes_tool . "group album"
+let s:selectAlbumPrompt = "Select album: "
 
 func! s:trimString(string)
   let string = substitute(a:string, '\s\+$', '', '')
@@ -32,6 +34,7 @@ function! ViTunes()
   noremap <buffer> <leader>p <Esc>:call <SID>openPlaylistDropdown()<cr>
   noremap <buffer> <leader>a <Esc>:call <SID>openArtistDropdown()<cr>
   noremap <buffer> <leader>g <Esc>:call <SID>openGenreDropdown()<cr>
+  noremap <buffer> <leader>A <Esc>:call <SID>openAlbumDropdown()<cr>
   noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
 endfunction
 
@@ -122,6 +125,17 @@ function! s:openGenreDropdown()
   call <SID>commonDropDownConfig()
   let s:selectionList = split(system(s:getGenresCommand), '\n')
   let s:selectionPrompt = s:selectGenrePrompt
+  call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
+endfunction
+
+
+function! s:openAlbumDropdown()
+  leftabove split ChoosePlaylist
+  inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('album')<CR> 
+  call setline(1, s:selectAlbumPrompt)
+  call <SID>commonDropDownConfig()
+  let s:selectionList = split(system(s:getAlbumsCommand), '\n')
+  let s:selectionPrompt = s:selectAlbumPrompt
   call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
 endfunction
 
