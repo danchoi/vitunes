@@ -13,6 +13,8 @@ class ViTunes
     #
     `mkdir -p #{ENV['HOME']}/.vim/plugin`
     File.open("#{ENV['HOME']}/.vim/plugin/vitunes.vim", "w") {|f| f.write plugin_body}
+    puts "Installed vitunes.vim into your ~/.vim/plugin directory"
+    puts "You should be able to invoke ViTunes in Vim with <Leader>i"
   end
 
   def self.help

@@ -55,7 +55,7 @@ endfunction
 
 " the main window
 function! ViTunes()
-  leftabove split ViTunesBuffer
+  rightbelow split ViTunesBuffer
   setlocal cursorline
   setlocal nowrap
   setlocal textwidth=0
@@ -87,18 +87,16 @@ function! ViTunes()
   noremap <buffer> <cr> :call <SID>playTrack()<cr>
   setlocal nomodifiable
   setlocal statusline=%!ViTunesStatusLine()
+
+  if line('$') == 1 " buffer empty
+    call s:help()
+  endif
 endfunction
 
 function! s:help()
-  " TODO show command list
-  " call a Ruby executable that comes with the gem
-  " This should just display the README
-  set modifiable
-  silent! 1,$delete
+  " This just displays the README
   let res = system("vitunes-help") 
-  silent! put =res
-  silent! 1delete
-  set nomodifiable
+  echo res  
 endfunction
 
 
@@ -335,6 +333,7 @@ function! s:deleteTracksFromPlaylist() range
 endfunction
 
 nnoremap <silent> <leader>i :call ViTunes()<cr>
+
 
 let g:ViTunesLoaded = 1
 
