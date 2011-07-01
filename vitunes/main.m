@@ -11,20 +11,50 @@
 static iTunesApplication *iTunes;
 static iTunesPlaylist *libraryPlaylist; 
 static iTunesSource *library;
+int const ARTIST_COL = 26;
+int const TRACK_NAME_COL = 33;
+int const GENRE_COL = 15;
+int const KIND_COL = 29;
+int const TIME_COL = 7;
+int const YEAR_COL = 4;
+int const ALBUM_COL = 30;
+
+NSString *trackListHeader() {
+  NSString *artist = [@"Artist" stringByPaddingToLength:ARTIST_COL withString:@" " startingAtIndex:0];
+  NSString *name = [@"Track" stringByPaddingToLength:TRACK_NAME_COL withString:@" " startingAtIndex:0];
+  NSString *genre = [@"Genre" stringByPaddingToLength:GENRE_COL withString:@" " startingAtIndex:0];
+  NSString *time = [@"Time" stringByPaddingToLength:TIME_COL withString:@" " startingAtIndex:0];
+  NSString *kind = [@"Kind" stringByPaddingToLength:KIND_COL withString:@" " startingAtIndex:0];
+  NSString *year = [@"Year" stringByPaddingToLength:YEAR_COL withString:@" " startingAtIndex:0];
+  NSString *album = [@"Album" stringByPaddingToLength:ALBUM_COL withString:@" " startingAtIndex:0];
+
+  NSString *artistSpacer = [@"-" stringByPaddingToLength:ARTIST_COL withString:@"-" startingAtIndex:0];
+  NSString *nameSpacer = [@"-" stringByPaddingToLength:TRACK_NAME_COL withString:@"-" startingAtIndex:0];
+  NSString *genreSpacer = [@"-" stringByPaddingToLength:GENRE_COL withString:@"-" startingAtIndex:0];
+  NSString *timeSpacer = [@"-" stringByPaddingToLength:TIME_COL withString:@"-" startingAtIndex:0];
+  NSString *kindSpacer = [@"-" stringByPaddingToLength:KIND_COL withString:@"-" startingAtIndex:0];
+  NSString *yearSpacer = [@"-" stringByPaddingToLength:YEAR_COL withString:@"-" startingAtIndex:0];
+  NSString *albumSpacer = [@"-" stringByPaddingToLength:ALBUM_COL withString:@"-" startingAtIndex:0];
+
+  NSString *headers = [NSString stringWithFormat: @"%@ | %@ | %@ | %@ | %@ | %@ | %@ | DatabaseID", artist, name, album, year, genre, time, kind ];
+  NSString *divider = [NSString stringWithFormat: @"%@-|-%@-|-%@-|-%@-|-%@-|-%@-|-%@-|-----------", 
+           artistSpacer, nameSpacer, albumSpacer, yearSpacer, genreSpacer, timeSpacer, kindSpacer ];
+  return [NSString stringWithFormat:@"%@\n%@", headers, divider];
+};
 
 NSString *formatTrackForDisplay(iTunesTrack *track) {
-  NSString *artist = [track.artist stringByPaddingToLength:26 withString:@" " startingAtIndex:0];
-  NSString *name = [track.name stringByPaddingToLength:33 withString:@" " startingAtIndex:0];
-  NSString *genre = [track.genre stringByPaddingToLength:15 withString:@" " startingAtIndex:0];
-  NSString *time = [track.time stringByPaddingToLength:7 withString:@" " startingAtIndex:0];
-  NSString *kind = [track.kind stringByPaddingToLength:29 withString:@" " startingAtIndex:0];
+  NSString *artist = [track.artist stringByPaddingToLength:ARTIST_COL withString:@" " startingAtIndex:0];
+  NSString *name = [track.name stringByPaddingToLength:TRACK_NAME_COL withString:@" " startingAtIndex:0];
+  NSString *genre = [track.genre stringByPaddingToLength:GENRE_COL withString:@" " startingAtIndex:0];
+  NSString *time = [track.time stringByPaddingToLength:TIME_COL withString:@" " startingAtIndex:0];
+  NSString *kind = [track.kind stringByPaddingToLength:KIND_COL withString:@" " startingAtIndex:0];
   NSString *year;
   if (track.year != 0) {
     year = [NSString stringWithFormat:@"%d", track.year];
   } else {
     year = @"    ";
   }
-  NSString *album = [track.album stringByPaddingToLength:30 withString:@" " startingAtIndex:0];
+  NSString *album = [track.album stringByPaddingToLength:ALBUM_COL withString:@" " startingAtIndex:0];
   return [NSString stringWithFormat: @"%@ | %@ | %@ | %@ | %@ | %@ | %@ | %d", 
           artist,
           name,
@@ -108,6 +138,7 @@ void groupTracksBy(NSString *property) {
 }
 
 void printTracks(NSArray *tracks) {
+  printf("%s\n", [trackListHeader() cStringUsingEncoding: NSUTF8StringEncoding]);
   for (iTunesTrack *track in tracks) {
     printf("%s\n", [formatTrackForDisplay(track) cStringUsingEncoding: NSUTF8StringEncoding]);
   }

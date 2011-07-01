@@ -242,7 +242,7 @@ function! s:submitQueryOrSelection(command)
     let bcommand = s:vitunes_tool . a:command . ' ' . shellescape(query)
   end
   echom bcommand
-  let res = system(bcommand)
+  let res = s:runCommand(bcommand)
   if a:command == 'addTracksToPlaylist'
     let res = system(s:vitunes_tool.'playlistTracks '.shellescape(query))
   endif
@@ -259,6 +259,7 @@ function! s:submitQueryOrSelection(command)
   endif
 endfunction
 
+" TODO does not work yet
 function! s:deleteTracksFromPlaylist() range
   if (s:currentPlaylist == '')
     echom "You can't delete tracks unless you're in a playlist"
