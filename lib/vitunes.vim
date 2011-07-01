@@ -55,6 +55,7 @@ function! s:openQueryWindow()
   noremap <buffer> q <Esc>:close
   inoremap <buffer> <Esc> <Esc>:close<CR>
   noremap <buffer> <Esc> <Esc>:close<CR>
+  let s:selectionPrompt = s:searchPrompt " this makes sure we parse the query correctly
   call setline(1, s:searchPrompt)
   normal $
   call feedkeys("a", "t")
@@ -159,7 +160,7 @@ function! s:submitQueryOrSelection(command)
   elseif a:command == 'album'
     let bcommand = s:vitunes_tool."predicate ".shellescape("album == '".query."'") 
   else
-    let bcommand = s:vitunes_tool . a:command . ' ' . query
+    let bcommand = s:vitunes_tool . a:command . ' ' . shellescape(query)
   end
   echom bcommand
   let res = split(system(bcommand), '\n')
