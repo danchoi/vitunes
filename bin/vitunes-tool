@@ -1,6 +1,0 @@
-#!/usr/bin/env ruby
-
-foundation_tool = File.join(File.dirname(__FILE__), '..', 'lib/vitunes-tool-objc')
-exec(foundation_tool)
-exit
-
