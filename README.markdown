@@ -66,8 +66,10 @@ Press `ENTER` or `ESC` to exit either search query or drop-down selection mode.
 ### Playhead
 
 * `SPACEBAR` play/pause
-* `>` next track
-* `<` previous track
+* `>` next track in ViTunesBuffer
+* `<` previous track in ViTunesBuffer
+* `,>` next track in iTunes current playlist
+* `,<` previous track in iTunes current playlist
 * `.` show current track and playlist, if any
 
 ### Copying tracks
