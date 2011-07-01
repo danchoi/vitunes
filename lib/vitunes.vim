@@ -9,10 +9,9 @@ let mapleader = ','
 " development build of command line tool
 let s:vitunes_tool = '/Users/choi/projects/vitunes/build/Release/vitunes '
 
-let s:search_prompt = "Search iTunes Music Library: "
+let s:searchPrompt = "Search iTunes Music Library: "
 let s:getPlaylistsCommand = s:vitunes_tool . "playlists"
 let s:selectPlaylistPrompt = "Select playlist: "
-
 
 func! s:trimString(string)
   let string = substitute(a:string, '\s\+$', '', '')
@@ -48,45 +47,23 @@ function! s:openQueryWindow()
   inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('search')<CR> 
   noremap <buffer> q <Esc>:close<cr>
   inoremap <buffer> <Esc> <Esc>:close<cr>
-  call setline(1, s:search_prompt)
+  call setline(1, s:searchPrompt)
   normal $
   call feedkeys("a", "t")
 endfunction
 
-
-" Navigation
-
-"  By Playlists 
-
-function! s:openPlaylistDropdown()
-  leftabove split ChoosePlaylist
-  setlocal textwidth=0
-  setlocal completefunc=PlaylistCompletion
-  setlocal buftype=nofile
-  setlocal noswapfile
-  setlocal modifiable
-  resize 1
-  inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('playlistTracks')<CR> 
-  noremap <buffer> q <Esc>:close<cr>
-  inoremap <buffer> <Esc> <Esc>:close<cr>
-  call setline(1, s:selectPlaylistPrompt)
-  normal $
-  let s:playlists = split(system(s:getPlaylistsCommand), '\n')
-  call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
-endfunction
-
-function! PlaylistCompletion(findstart, base)
+function! GenericCompletion(findstart, base)
   if a:findstart
-    let prompt = s:selectPlaylistPrompt
+    let prompt = s:selectionPrompt
     let start = len(prompt) + 1
     return start
   else
     if (a:base == '')
-      return s:playlists
+      return s:selectionList
     else
       let res = []
       " find tracks matching a:base
-      for m in s:playlists
+      for m in s:selectionList
         " why doesn't case insensitive flag work?
         if m =~ '\c' . a:base 
           call add(res, m)
@@ -96,6 +73,28 @@ function! PlaylistCompletion(findstart, base)
     endif
   endif
 endfun
+
+
+" Navigation
+
+"  By Playlists 
+function! s:openPlaylistDropdown()
+  leftabove split ChoosePlaylist
+  setlocal textwidth=0
+  setlocal completefunc=GenericCompletion
+  setlocal buftype=nofile
+  setlocal noswapfile
+  setlocal modifiable
+  resize 1
+  inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('playlistTracks')<CR> 
+  noremap <buffer> q <Esc>:close<cr>
+  inoremap <buffer> <Esc> <Esc>:close<cr>
+  call setline(1, s:selectPlaylistPrompt)
+  normal $
+  let s:selectionList = split(system(s:getPlaylistsCommand), '\n')
+  let s:selectionPrompt = s:selectPlaylistPrompt
+  call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
+endfunction
 
 "  By Artist 
 
