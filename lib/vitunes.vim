@@ -145,18 +145,19 @@ function! s:submitQueryOrSelection(command)
     close
     return
   endif
-  let query = get(split(getline('.'), ':\s*'), 1)
+
+  let query = getline('.')[len(s:selectionPrompt):] " get(split(getline('.'), ':\s*'), 1)
   close
   " echom query
   if (len(query) == 0 || query =~ '^\s*$')
     return
   endif
   if a:command == 'artist'
-    let bcommand = s:vitunes_tool."predicate \"artist == '".query."'\""
+    let bcommand = s:vitunes_tool."predicate ".shellescape("artist == '".query."'")
   elseif a:command == 'genre'
-    let bcommand = s:vitunes_tool."predicate \"genre == '".query."'\""
+    let bcommand = s:vitunes_tool."predicate ".shellescape("genre == '".query."'") 
   elseif a:command == 'album'
-    let bcommand = s:vitunes_tool."predicate \"album == '".query."'\""
+    let bcommand = s:vitunes_tool."predicate ".shellescape("album == '".query."'") 
   else
     let bcommand = s:vitunes_tool . a:command . ' ' . query
   end
