@@ -47,7 +47,7 @@ directory.
 The query and selection drop downs make use of Vim autocompletion. Start typing
 the first few letters of what you want. For example, if you want to jump to all
 artists that start with the letter 'P', type 'P' and you'll see the drop down
-items update.
+items update. This autocompletion is case-sensitive.
 
 `CTRL-p` and `CTRL-n` let you navigate the matches. Press `ENTER` to select
 one.
