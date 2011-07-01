@@ -16,12 +16,25 @@ let s:getGenresCommand = s:vitunes_tool . "group genre | uniq "
 let s:selectGenrePrompt = "Select genre: "
 let s:getAlbumsCommand = s:vitunes_tool . "group album | uniq "
 let s:selectAlbumPrompt = "Select album: "
+let s:addTracksToPlaylistPrompt = "Add track(s) to this playlist: "
 
 let s:currentPlaylist = ''
+let s:selectedTrackIds = []
 
 func! s:trimString(string)
   let string = substitute(a:string, '\s\+$', '', '')
   return substitute(string, '^\s\+', '', '')
+endfunc
+
+function! s:collectTrackIds(startline, endline)
+  let trackIds = []
+  let lnum = a:startline
+  while lnum <= a:endline
+    let trackId = matchstr(getline(lnum), '\d\+$')
+    call add(trackIds, trackId)
+    let lnum += 1
+  endwhile
+  return trackIds
 endfunc
 
 
@@ -39,6 +52,7 @@ function! ViTunes()
   noremap <buffer> ,a :call <SID>openArtistDropdown()<cr>
   noremap <buffer> ,g :call <SID>openGenreDropdown()<cr>
   noremap <buffer> ,A :call <SID>openAlbumDropdown()<cr>
+  noremap <buffer> ,c :call <SID>openAddToPlaylistDropDown()<cr>
   noremap <buffer> ,q :close<CR>
   "noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
   noremap <buffer> <cr> :call <SID>playTrack()<cr>
@@ -106,6 +120,7 @@ function! s:commonDropDownConfig()
   resize 1
   noremap <buffer> q <Esc>:close<cr>
   inoremap <buffer> <Esc> <Esc>:close<cr>
+  call setline(1, s:selectionPrompt)
   normal $
 endfunction
 
@@ -115,44 +130,49 @@ endfunction
 function! s:openPlaylistDropdown()
   leftabove split ChoosePlaylist
   inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('playlistTracks')<CR> 
-  call setline(1, s:selectPlaylistPrompt)
+  let s:selectionPrompt = s:selectPlaylistPrompt
   call <SID>commonDropDownConfig()
   let s:selectionList = split(system(s:getPlaylistsCommand), '\n')
-  let s:selectionPrompt = s:selectPlaylistPrompt
   call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
 endfunction
 
 function! s:openArtistDropdown()
   leftabove split ChoosePlaylist
   inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('artist')<CR> 
-  call setline(1, s:selectArtistPrompt)
+  let s:selectionPrompt = s:selectArtistPrompt
   call <SID>commonDropDownConfig()
   let s:selectionList = split(system(s:getArtistsCommand), '\n')
-  let s:selectionPrompt = s:selectArtistPrompt
   call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
 endfunction
 
 function! s:openGenreDropdown()
   leftabove split ChoosePlaylist
   inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('genre')<CR> 
-  call setline(1, s:selectGenrePrompt)
+  let s:selectionPrompt = s:selectGenrePrompt
   call <SID>commonDropDownConfig()
   let s:selectionList = split(system(s:getGenresCommand), '\n')
-  let s:selectionPrompt = s:selectGenrePrompt
   call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
 endfunction
 
 function! s:openAlbumDropdown()
   leftabove split ChoosePlaylist
   inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('album')<CR> 
-  call setline(1, s:selectAlbumPrompt)
+  let s:selectionPrompt = s:selectAlbumPrompt
   call <SID>commonDropDownConfig()
   let s:selectionList = split(system(s:getAlbumsCommand), '\n')
-  let s:selectionPrompt = s:selectAlbumPrompt
   call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
 endfunction
 
-
+function! s:openAddToPlaylistDropDown() range
+  let s:selectedTrackIds = s:collectTrackIds(a:firstline, a:lastline)
+  leftabove split ChoosePlaylist
+  inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('addTracksToPlaylist')<CR> 
+  let s:selectionPrompt = s:addTracksToPlaylistPrompt 
+  echom s:selectionPrompt
+  call <SID>commonDropDownConfig()
+  let s:selectionList = split(system(s:getPlaylistsCommand), '\n')
+  call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
+endfunction
 
 " selection window pick or search window query
 function! s:submitQueryOrSelection(command)
@@ -168,16 +188,23 @@ function! s:submitQueryOrSelection(command)
     return
   endif
   if a:command == 'artist'
+    let query = substitute(query, "'", "\'", '')
     let bcommand = s:vitunes_tool."predicate ".shellescape("artist == '".query."'")
   elseif a:command == 'genre'
     let bcommand = s:vitunes_tool."predicate ".shellescape("genre == '".query."'") 
   elseif a:command == 'album'
     let bcommand = s:vitunes_tool."predicate ".shellescape("album == '".query."'") 
+  elseif a:command == 'addTracksToPlaylist'
+    let trackIds = join(s:selectedTrackIds, ',')
+    let bcommand = s:vitunes_tool.a:command." ".trackIds." ".query 
   else
     let bcommand = s:vitunes_tool . a:command . ' ' . shellescape(query)
   end
   echom bcommand
-  let res = split(system(bcommand), '\n')
+  let res = system(bcommand)
+  if a:command == 'addTracksToPlaylist'
+    let res = system(s:vitunes_tool.'playlistTracks '.shellescape(query))
+  endif
   setlocal modifiable
   silent! 1,$delete
   silent! put =res
@@ -191,7 +218,7 @@ function! s:submitQueryOrSelection(command)
   endif
 endfunction
 
-nnoremap <silent> <leader>it :call ViTunes()<cr>
+nnoremap <silent> <leader>i :call ViTunes()<cr>
 
 let g:ViTunesLoaded = 1
 

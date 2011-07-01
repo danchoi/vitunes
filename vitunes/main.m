@@ -42,31 +42,45 @@ SBElementArray *search(NSArray *args)  {
   return [libraryPlaylist searchFor:query only:iTunesESrAAll];
 }
 
-void playTrackID(NSString *trackID) {
+NSNumber *convertNSStringToNumber(NSString *s) {
   NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
   [f setNumberStyle:NSNumberFormatterDecimalStyle];
-  NSNumber *databaseId = [f numberFromString:trackID];
+  NSNumber *result = [f numberFromString:s];
   [f release];
+  return result;
+}
+
+iTunesTrack *findTrackID(NSString *trackID) {
+  NSNumber *databaseId = convertNSStringToNumber(trackID);
   NSArray *xs = [[libraryPlaylist tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"databaseID == %@", databaseId]];
   iTunesTrack* t = [xs objectAtIndex:0];
+  return t;
+}
+
+void playTrackID(NSString *trackID) {
+  iTunesTrack* t = findTrackID(trackID);
   NSLog(@"Playing track: %@", [t name]);
-  // TODO report a missing track?
+  // TODO report a missing track
   [t playOnce:true]; // false would play next song on list after this one finishes
 }
 
 void playTrackIDFromPlaylist(NSString *trackID, NSString *playlistName) {
-  NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-  [f setNumberStyle:NSNumberFormatterDecimalStyle];
-  NSNumber *databaseId = [f numberFromString:trackID];
-  [f release];
+  NSNumber *databaseId = convertNSStringToNumber(trackID);
   iTunesPlaylist *playlist =  [[library playlists] objectWithName:playlistName];
   NSArray *xs = [[playlist tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"databaseID == %@", databaseId]];
   iTunesTrack* t = [xs objectAtIndex:0];
   NSLog(@"Playing track: %@ from playlist: %@", [t name], playlistName);
-  // TODO report a missing track?
   [t playOnce:false]; // play playlist continuously
 }
 
+void addTracksToPlaylistName(NSString *trackIds, NSString *playlistName) {
+  iTunesPlaylist *playlist =  [[library playlists] objectWithName:playlistName];
+  for (NSString *trackID in [trackIds componentsSeparatedByString:@","]) {
+    iTunesTrack* t = findTrackID(trackID);
+    NSLog(@"Adding track: %@ to playlist: %@", [t name], [playlist name]);
+    [t duplicateTo:playlist];
+  }
+}
 
 void groupTracksBy(NSString *property) {
   // gets list of all e.g. artists, genres
@@ -165,6 +179,9 @@ int main (int argc, const char * argv[]) {
     playlistTracks([args objectAtIndex:0]);
   } else if ([action isEqual: @"playPlaylist"]) {
     playPlaylist([args objectAtIndex:0]);
+  } else if ([action isEqual: @"addTracksToPlaylist"]) { 
+    // make sure to quote args
+    addTracksToPlaylistName([args objectAtIndex:0], [args objectAtIndex:1]);
   } else if ([action isEqual: @"itunes"]) {
     // argument is an action for iTunesApplication to perform
     itunes([args objectAtIndex:0]);
