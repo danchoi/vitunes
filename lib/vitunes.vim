@@ -37,6 +37,11 @@ function! s:collectTrackIds(startline, endline)
   return trackIds
 endfunc
 
+function! s:runCommand(command)
+  " echom a:command " can use for debugging
+  let res = system(a:command)
+  return res
+endfunction
 
 " the main window
 function! ViTunes()
@@ -53,12 +58,29 @@ function! ViTunes()
   noremap <buffer> ,g :call <SID>openGenreDropdown()<cr>
   noremap <buffer> ,A :call <SID>openAlbumDropdown()<cr>
   noremap <buffer> ,c :call <SID>openAddToPlaylistDropDown()<cr>
+
+  noremap <buffer> > :call <SID>itunesControl("nextTrack")<cr>
+  noremap <buffer> < :call <SID>itunesControl("previousTrack")<cr>
+  noremap <buffer> <Space>  :call <SID>itunesControl("playpause")<cr>
+  noremap <buffer> -  :call <SID>changeVolume("volumeDown")<cr>
+  noremap <buffer> +  :call <SID>changeVolume("volumeUp")<cr>
+  noremap <buffer> =  :call <SID>changeVolume("volumeUp")<cr>
   " Not working yet
   " noremap <buffer> <BS> :call <SID>deleteTracksFromPlaylist()<CR> "
   noremap <buffer> ,q :close<CR>
   "noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
   noremap <buffer> <cr> :call <SID>playTrack()<cr>
   setlocal nomodifiable
+endfunction
+
+function! s:itunesControl(command)
+  let res = s:runCommand(s:vitunes_tool . "itunes ".a:command)
+  echom res
+endfunction
+
+function! s:changeVolume(command)
+  let res = s:runCommand(s:vitunes_tool.a:command)
+  echom res
 endfunction
 
 function! s:playTrack()

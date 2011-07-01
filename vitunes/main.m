@@ -155,6 +155,18 @@ void itunes(NSString *command) {
   }
 }
 
+void turnVolume(NSString *direction) {
+  NSInteger currentVolume = iTunes.soundVolume;
+  NSInteger increment = 8;
+  if (currentVolume < 100 && [direction isEqual:@"up"]) {
+    iTunes.soundVolume += increment;
+  } else if (currentVolume > 0 && [direction isEqual:@"down"]) {
+    iTunes.soundVolume -= increment;
+  }
+  printf("Changing volume %d -> %d", (int)currentVolume, (int)iTunes.soundVolume);
+}
+
+
 
 
 int main (int argc, const char * argv[]) {
@@ -195,6 +207,10 @@ int main (int argc, const char * argv[]) {
   } else if ([action isEqual: @"addTracksToPlaylist"]) { 
     // make sure to quote args
     addTracksToPlaylistName([args objectAtIndex:0], [args objectAtIndex:1]);
+  } else if ([action isEqual: @"volumeUp"]) {
+    turnVolume(@"up");
+  } else if ([action isEqual: @"volumeDown"]) {
+    turnVolume(@"down");
   } else if ([action isEqual: @"itunes"]) {
     // argument is an action for iTunesApplication to perform
     itunes([args objectAtIndex:0]);

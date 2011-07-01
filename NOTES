@@ -205,8 +205,6 @@ tracks list
 
 TODO bind volume control, playpause, next, other commands, let user select from dropdown?
 
-TODO add to playlist
-
 TODO documentation
 - when installing gem, print message to run installer for vim plugin
 
@@ -216,5 +214,6 @@ TODO LATER use sortTitle -- not urgent
 
 TODO LATER -- handle case of missing Track (not on disk); e.g. ATB
 
+TODO remove from playlist
 
 
