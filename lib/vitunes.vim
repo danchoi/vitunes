@@ -255,6 +255,8 @@ function! s:submitQueryOrSelection(command)
   normal 3G
   if (a:command == 'playlistTracks')
     let s:currentPlaylist = query
+    " puts this playlist on top
+
   else
     let s:currentPlaylist = ''
   endif

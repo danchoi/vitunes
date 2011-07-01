@@ -203,20 +203,20 @@ tracks list
 
 - select a track to play. if IN playlist, start playing continuously
 
-TODO simple display of currentTrack (on status line)
-TODO display of currentPlaylist on status line
-TODO put last seen Playlist on top of Playlist drop down
-TODO on startup, load contents of current playlist?
-TODO documentation
+TODO 
+- simple display of currentTrack (on status line)
+- display of currentPlaylist on status line
+- on startup, load contents of current playlist?
+- documentation
 - when installing gem, print message to run installer for vim plugin
 
 ------------------------------------------------------------------------
 
-TODO LATER use sortTitle -- not urgent
+LATER
 
-TODO LATER -- handle case of missing Track (not on disk); e.g. ATB
-
-TODO remove from playlist
-
+- use sortTitle -- not urgent
+- handle case of missing Track (not on disk); e.g. ATB
+- remove from playlist
+- put last seen Playlist on top of Playlist drop down
 
 
