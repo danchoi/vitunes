@@ -98,9 +98,15 @@ void playTrackIDFromPlaylist(NSString *trackID, NSString *playlistName) {
   NSNumber *databaseId = convertNSStringToNumber(trackID);
   iTunesPlaylist *playlist =  [[library playlists] objectWithName:playlistName];
   NSArray *xs = [[playlist tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"databaseID == %@", databaseId]];
-  iTunesTrack* t = [xs objectAtIndex:0];
-  NSLog(@"Playing track: %@ from playlist: %@", [t name], playlistName);
-  [t playOnce:false]; // play playlist continuously
+  if ([xs count] == 0) {
+    NSLog(@"Could not find trackID: %@ in playlist: %@. Playing from Library.", trackID, playlistName);
+    playTrackID(trackID);
+    return;
+  } else {
+    iTunesTrack* t = [xs objectAtIndex:0];
+    NSLog(@"Playing track: %@ from playlist: %@", [t name], playlistName);
+    [t playOnce:false]; // play playlist continuously
+  }
 }
 
 void addTracksToPlaylistName(NSString *trackIds, NSString *playlistName) {
@@ -157,6 +163,9 @@ void playlistTracks(NSString *playlistName) {
 
 void playPlaylist(NSString *playlistName) {
   iTunesPlaylist *playlist = [[library playlists] objectWithName:playlistName];
+  if (playlist == nil) {
+    NSLog(@"No playlist found: %@", playlistName);
+  }
   [playlist playOnce:true];
 }
 
@@ -196,8 +205,6 @@ void turnVolume(NSString *direction) {
   }
   printf("Changing volume %d -> %d", (int)currentVolume, (int)iTunes.soundVolume);
 }
-
-
 
 
 int main (int argc, const char * argv[]) {
