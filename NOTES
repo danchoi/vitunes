@@ -208,6 +208,11 @@ TODO
 - documentation - ruby command in gem
 - when installing gem, print message to run installer for vim plugin
 - screenshots
+- compile vitunes tool and put in bin/
+- rename to vitunes-tool so we can have a ruby vitunes command
+  (eventually)
+
+
 
 ------------------------------------------------------------------------
 LATER

@@ -188,6 +188,10 @@ void itunes(NSString *command) {
       // Note that the real classname is ITunesTrack, not iTunesTrack;
       // For current Track
       if ([[result className] isEqual:@"ITunesTrack"]) {
+        if ([result name ] == nil) {
+          printf("No current track");
+          return;
+        }
          s = [NSString stringWithFormat:@"\"%@\" by %@ from %@",
            [((iTunesTrack *)result) name],
            [((iTunesTrack *)result) artist],
