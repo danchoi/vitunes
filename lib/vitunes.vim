@@ -74,9 +74,6 @@ function! GenericCompletion(findstart, base)
   endif
 endfun
 
-
-" Navigation
-
 function! s:commonDropDownConfig()
   setlocal textwidth=0
   setlocal completefunc=GenericCompletion
@@ -90,7 +87,8 @@ function! s:commonDropDownConfig()
 endfunction
 
 
-"  By Playlists 
+" Drop downs
+
 function! s:openPlaylistDropdown()
   leftabove split ChoosePlaylist
   inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('playlistTracks')<CR> 
