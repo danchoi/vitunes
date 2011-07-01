@@ -82,6 +82,19 @@ void addTracksToPlaylistName(NSString *trackIds, NSString *playlistName) {
   }
 }
 
+// TODO This doesn't seem to work
+void rmTracksFromPlaylistName(NSString *trackIds, NSString *playlistName) {
+  iTunesPlaylist *playlist =  [[library playlists] objectWithName:playlistName];
+
+  for (NSString *trackID in [trackIds componentsSeparatedByString:@","]) {
+    iTunesTrack* t = findTrackID(trackID);
+    NSLog(@"Removing track: %@ from playlist: %@", [t name], [playlist name]);
+    [[playlist tracks] removeObject:t];
+  }
+
+}
+
+
 void groupTracksBy(NSString *property) {
   // gets list of all e.g. artists, genres
   // NOTE year won't work yet

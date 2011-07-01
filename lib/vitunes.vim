@@ -53,6 +53,8 @@ function! ViTunes()
   noremap <buffer> ,g :call <SID>openGenreDropdown()<cr>
   noremap <buffer> ,A :call <SID>openAlbumDropdown()<cr>
   noremap <buffer> ,c :call <SID>openAddToPlaylistDropDown()<cr>
+  " Not working yet
+  " noremap <buffer> <BS> :call <SID>deleteTracksFromPlaylist()<CR> "
   noremap <buffer> ,q :close<CR>
   "noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
   noremap <buffer> <cr> :call <SID>playTrack()<cr>
@@ -217,6 +219,21 @@ function! s:submitQueryOrSelection(command)
     let s:currentPlaylist = ''
   endif
 endfunction
+
+function! s:deleteTracksFromPlaylist() range
+  if (s:currentPlaylist == '')
+    echom "You can't delete tracks unless you're in a playlist"
+    return
+  endif
+  let s:selectedTrackIds = s:collectTrackIds(a:firstline, a:lastline)
+  let trackIds = join(s:selectedTrackIds, ',')
+  let bcommand = s:vitunes_tool.'rmTracksFromPlaylist '.trackIds." ".s:currentPlaylist 
+  echom bcommand
+  let res = system(bcommand)
+  " delete lines from buffer
+  echom res
+endfunction
+
 
 nnoremap <silent> <leader>i :call ViTunes()<cr>
 
