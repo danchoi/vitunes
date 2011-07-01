@@ -44,10 +44,10 @@ directory.
 * `,A` select album
 * `ENTER` start playing a track under cursor
 
-The query and selection drop downs make Vim autocompletion. Start typing
-the first few letters of what you want. For example, if you want to jump
-to all artists that start with the letter 'P', type 'P' and you'll see
-the drop down items update.
+The query and selection drop downs make use of Vim autocompletion. Start typing
+the first few letters of what you want. For example, if you want to jump to all
+artists that start with the letter 'P', type 'P' and you'll see the drop down
+items update.
 
 `CTRL-p` and `CTRL-n` let you navigate the matches. Press `ENTER` to select
 one.
