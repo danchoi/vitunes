@@ -204,14 +204,12 @@ tracks list
 - select a track to play. if IN playlist, start playing continuously
 
 TODO 
-- simple display of currentTrack (on status line)
-- display of currentPlaylist on status line
+- go back to last playlist or put it at top
 - on startup, load contents of current playlist?
 - documentation
 - when installing gem, print message to run installer for vim plugin
 
 ------------------------------------------------------------------------
-
 LATER
 
 - use sortTitle -- not urgent

@@ -19,6 +19,7 @@ let s:selectAlbumPrompt = "Select album: "
 let s:addTracksToPlaylistPrompt = "Add track(s) to this playlist: "
 
 let s:currentPlaylist = ''
+let s:lastPlaylist = ''
 let s:selectedTrackIds = []
 
 func! s:trimString(string)
@@ -182,6 +183,10 @@ function! s:openPlaylistDropdown()
   let s:selectionPrompt = s:selectPlaylistPrompt
   call <SID>commonDropDownConfig()
   let s:selectionList = split(system(s:getPlaylistsCommand), '\n')
+  if (s:lastPlaylist != '')
+    call insert(s:selectionList, s:lastPlaylist);
+    call insert(s:selectionList, s:lastPlaylist);
+  endif
   call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
 endfunction
 
@@ -220,6 +225,9 @@ function! s:openAddToPlaylistDropDown() range
   echom s:selectionPrompt
   call <SID>commonDropDownConfig()
   let s:selectionList = split(system(s:getPlaylistsCommand), '\n')
+  if (s:lastPlaylist != '')
+    call insert(s:selectionList, s:lastPlaylist);
+  endif
   call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
 endfunction
 
@@ -263,8 +271,7 @@ function! s:submitQueryOrSelection(command)
   normal 3G
   if (a:command == 'playlistTracks')
     let s:currentPlaylist = query
-    " puts this playlist on top
-
+    let s:lastPlaylist = query
   else
     let s:currentPlaylist = ''
   endif
