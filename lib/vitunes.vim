@@ -26,13 +26,18 @@ endfunc
 " the main window
 function! ViTunes()
   leftabove split ViTunesBuffer
+  setlocal cursorline
+  setlocal nowrap
   setlocal textwidth=0
   setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
   noremap <buffer> ,s :call <SID>openQueryWindow()<cr>
   noremap <buffer> ,p :call <SID>openPlaylistDropdown()<cr>
   noremap <buffer> ,a :call <SID>openArtistDropdown()<cr>
   noremap <buffer> ,g :call <SID>openGenreDropdown()<cr>
   noremap <buffer> ,A :call <SID>openAlbumDropdown()<cr>
+  noremap <buffer> ,q :close<CR>
   "noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
   noremap <buffer> <cr> :call <SID>playTrack()<cr>
   setlocal nomodifiable

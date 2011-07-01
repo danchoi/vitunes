@@ -13,9 +13,9 @@ static iTunesPlaylist *libraryPlaylist;
 static iTunesSource *library;
 
 NSString *formatTrackForDisplay(iTunesTrack *track) {
-  NSString *artist = [track.artist stringByPaddingToLength:20 withString:@" " startingAtIndex:0];
-  NSString *name = [track.name stringByPaddingToLength:30 withString:@" " startingAtIndex:0];
-  NSString *genre = [track.genre stringByPaddingToLength:20 withString:@" " startingAtIndex:0];
+  NSString *artist = [track.artist stringByPaddingToLength:26 withString:@" " startingAtIndex:0];
+  NSString *name = [track.name stringByPaddingToLength:33 withString:@" " startingAtIndex:0];
+  NSString *genre = [track.genre stringByPaddingToLength:15 withString:@" " startingAtIndex:0];
   NSString *time = [track.time stringByPaddingToLength:7 withString:@" " startingAtIndex:0];
   NSString *kind = [track.kind stringByPaddingToLength:29 withString:@" " startingAtIndex:0];
   NSString *year;
