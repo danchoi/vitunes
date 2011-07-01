@@ -99,6 +99,9 @@ endfunction
 
 function! s:playTrack()
   let trackID = matchstr(getline(line('.')), '\d\+$')
+  if (trackID == '')
+    return
+  endif
   let command = ""
   if (s:currentPlaylist != '')
     let command = s:vitunes_tool . "playTrackIDFromPlaylist ".trackID.' '.s:currentPlaylist

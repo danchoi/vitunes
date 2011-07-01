@@ -203,6 +203,9 @@ tracks list
 
 - select a track to play. if IN playlist, start playing continuously
 
+TODO simple display of currentTrack (on status line)
+TODO display of currentPlaylist on status line
+TODO put last seen Playlist on top of Playlist drop down
 TODO on startup, load contents of current playlist?
 TODO documentation
 - when installing gem, print message to run installer for vim plugin
