@@ -6,7 +6,7 @@ ViTunes lets you control and navigate iTunes from the comfort of Vim.
 
 Benefits:
 
-* control iTunes without leaving Vim, where you're probably at your most productive and least time-wasting
+* control iTunes without leaving Vim, where one is most productive and least time-wasting
 * avoid using the mouse or trackpad; keystrokes get you there faster
 * control iTunes from another computer (via ssh session), across the room or across an ocean
 * let multiple people control one instance of iTunes over ssh
