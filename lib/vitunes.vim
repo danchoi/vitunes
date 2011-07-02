@@ -320,7 +320,7 @@ function! s:submitQueryOrSelection(command)
   setlocal nomodifiable
   " position cursor at 1st track
   normal 3G
-  if (a:command == 'playlistTracks')
+  if (a:command == 'playlistTracks' || a:command == 'addTracksToPlaylist')
     let s:currentPlaylist = query
     let s:lastPlaylist = query
   else
