@@ -89,6 +89,13 @@ To copy tracks, put the cursor on a track or select a range of tracks,
 and then hit `,c` to select a playlist to copy them to. The tracks will be
 added to the end of the playlist.
 
+## Bug reports and feature requests
+
+Please submit these at either of these places:
+
+* <https://github.com/danchoi/vitunes/issues>
+* <http://groups.google.com/group/vitunes-users>
+
 ## How to contact the developer
 
 My name is Daniel Choi. I specialize in Ruby, Rails, MySQL, PostgreSQL, and iOS
