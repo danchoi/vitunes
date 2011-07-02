@@ -61,10 +61,11 @@ mapleader is `\` or something else, use that instead.
 * `,A` select album
 * `ENTER` start playing a track under cursor
 
-The selection drop-downs make use of Vim autocompletion. Start typing
-the first few letters of what you want. For example, if you want to jump to all
-artists that start with the letter 'P', type 'P' and you'll see the drop-down
-items update. This autocompletion is case-sensitive.
+Playlist, artist, genre, and album navigation (but not search) use make use of
+Vim autocompletion. Start typing the first few letters of what you want. For
+example, if you want to jump to all artists that start with the letter 'P',
+type 'P' and you'll see the drop-down items update. This autocompletion is
+case-sensitive.
 
 `CTRL-p` and `CTRL-n` let you navigate the drop-down matches. Press `ENTER` to select
 one.
