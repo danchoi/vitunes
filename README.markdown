@@ -76,8 +76,8 @@ More advanced autocompletion tips:
 * `CTRL-x C-u` reactivates autocompletion if it's gone away
 * `CTRL-y` selects the highlighted match without triggering ENTER
 
-To exist the drop down or search query mini-window, press `ENTER` when the
-query line is blank, or try `ESC` then `q`. 
+To exit the autocompletion or search query mode, press `ENTER` when the query
+line is blank, or try `ESC` then `q`. 
 
 ### Volume Control
 
