@@ -96,7 +96,7 @@ Please submit these at either of these places:
 * <https://github.com/danchoi/vitunes/issues>
 * <http://groups.google.com/group/vitunes-users>
 
-## How to contact the developer
+## About the developer
 
 My name is Daniel Choi. I specialize in Ruby, Rails, MySQL, PostgreSQL, and iOS
 development. I am based in Cambridge, Massachusetts, USA, and the little
