@@ -83,7 +83,7 @@ function! ViTunes()
 
   " Not working yet
   " noremap <buffer> <BS> :call <SID>deleteTracksFromPlaylist()<CR> "
-  noremap <buffer> ,i :close<CR>
+  noremap <buffer> <Leader>i :close<CR>
   noremap <buffer> ? :call <SID>help()<CR>
   "noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
   noremap <buffer> <cr> :call <SID>playTrack()<cr>
