@@ -34,7 +34,7 @@ Then
 directory. 
 
 If you get an error message saying that vitunes-install is missing, then you
-probably have a `PATH` issue. Try one of these wordarounds:
+probably have a `PATH` issue. Try one of these workarounds:
 
 * Put the directory where Rubygems installs executable on your `PATH`
 * Try installing with `sudo gem install && vitunes-install`
