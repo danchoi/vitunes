@@ -72,7 +72,7 @@ function! ViTunes()
   noremap <buffer> > :call <SID>nextTrack()<cr>
   noremap <buffer> < :call <SID>prevTrack()<cr>
   noremap <buffer> >> :call <SID>itunesControl("nextTrack")<cr>
-  noremap <buffer> << :call <SID>itunesControl("prevTrack")<cr>
+  noremap <buffer> << :call <SID>itunesControl("backTrack")<cr>
   
   
   noremap <buffer> .  :call <SID>currentTrackAndPlaylist()<cr>
