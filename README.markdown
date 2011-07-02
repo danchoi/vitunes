@@ -119,6 +119,11 @@ added to the end of the playlist.
 If this target playlist is already playing, you can keep queuing tracks to it
 and let the mix play out automatically.
 
+### Managing playlists
+
+* `:NewPlaylist [new-playlist-name]` creates a new playlist
+
+
 ## Bug reports and feature requests
 
 Please submit these at either of these places:

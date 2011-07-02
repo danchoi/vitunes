@@ -223,6 +223,18 @@ void turnVolume(NSString *direction) {
   printf("Changing volume %d -> %d", (int)currentVolume, (int)iTunes.soundVolume);
 }
 
+void newPlaylist(NSString *name) {
+  // note that we have to force realize it with get to check for missing
+  iTunesPlaylist *existingPlaylist = [[[library playlists] objectWithName:name] get];
+  if (existingPlaylist != nil) {
+    printf("%s already exists", [[existingPlaylist name] cStringUsingEncoding: NSUTF8StringEncoding]);
+    return;
+  }
+  NSDictionary *props = [NSDictionary dictionaryWithObject:name forKey:@"name"];
+  iTunesPlaylist *playlist = [[[iTunes classForScriptingClass:@"playlist"] alloc] initWithProperties:props];
+  [[library playlists] addObject:playlist]; 
+  printf("Created new playlist: %s", [name cStringUsingEncoding:NSUTF8StringEncoding]);
+}
 
 int main (int argc, const char * argv[]) {
   NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
@@ -266,6 +278,8 @@ int main (int argc, const char * argv[]) {
     turnVolume(@"up");
   } else if ([action isEqual: @"volumeDown"]) {
     turnVolume(@"down");
+  } else if ([action isEqual: @"newPlaylist"]) {
+    newPlaylist([args objectAtIndex:0]); 
   } else if ([action isEqual: @"itunes"]) {
     // argument is an action for iTunesApplication to perform
     itunes([args objectAtIndex:0]);

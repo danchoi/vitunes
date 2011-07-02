@@ -8,8 +8,8 @@ if exists("g:vitunes_tool")
   let s:vitunes_tool = g:vitunes_tool
 else
   " This is the development version (specific to D Choi's setup)
+  let s:vitunes_tool = '/Users/choi/projects/vitunes/build/Release/vitunes '
   " Maybe I should make this a relative path
-  let s:vitunes_tool = '/Users/choi/projects/vitunes/lib/vitunes-tool-objc '
 endif
 
 let s:searchPrompt = "Search iTunes Music Library: "
@@ -89,6 +89,8 @@ function! ViTunes()
   noremap <buffer> <cr> :call <SID>playTrack()<cr>
   setlocal nomodifiable
   setlocal statusline=%!ViTunesStatusLine()
+
+  command! -buffer -bar -nargs=1 NewPlaylist call s:newPlaylist(<f-args>)
 
   if line('$') == 1 " buffer empty
     let msg = "Welcome to ViTunes\n\nPress ? for help"
@@ -171,7 +173,7 @@ function! s:currentTrackAndPlaylist()
 endfunction
 
 function! s:openQueryWindow()
-  leftabove split SearchTracks
+  leftabove split SearchLibrary
   setlocal textwidth=0
   setlocal buftype=nofile
   setlocal noswapfile
@@ -338,6 +340,13 @@ function! s:deleteTracksFromPlaylist() range
   echom bcommand
   let res = system(bcommand)
   " delete lines from buffer
+  echom res
+endfunction
+
+function! s:newPlaylist(name)
+  let command = s:vitunes_tool.'newPlaylist '.shellescape(a:name)
+  echom command
+  let res = system(s:vitunes_tool.'newPlaylist '.shellescape(a:name))
   echom res
 endfunction
 
