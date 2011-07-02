@@ -97,14 +97,15 @@ line is blank, or try `ESC` then `q`.
 * `<<` previous track in iTunes current playlist
 * `.` show current track and playlist, if any
 
-One thing to note: if you start playing a track that you've gotten to through a
-playlist search, iTunes will play in continous mode, where the next track in
-the playlist will automatically start playing after the current one ends.
+One thing to note: if you start playing a track that you've gotten to by going
+through the playlist dropdown, iTunes will play in continous mode, where the
+next track in the playlist will automatically start playing after the current
+one ends.
 
-But if you start playing a track you got to through query search or some other
-path, iTunes will stop playing after the track you just selected ends.
+But if you start playing a track you found some other way (e.g. via search
+query), iTunes will stop playing after that track ends.
 
-If you want use ViTunes to find and queue a bunch of tracks and have them play 
+If you want to use ViTunes to find and queue a bunch of tracks and have them play 
 in automatic succession, use the next feature...
 
 ### Copying tracks
