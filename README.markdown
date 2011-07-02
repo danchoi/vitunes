@@ -50,7 +50,10 @@ mapleader is `\` or something else, use that instead.
 ### General commands
 
 * `,i` invoke or dismiss ViTunes 
+* `,I` invoke ViTunes and go full screen with it
 * `?` show help and commands
+
+`,I` is useful if you want to launch immediately into ViTunes after starting Vim.
 
 ### Navigation
 
