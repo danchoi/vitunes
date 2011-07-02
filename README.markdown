@@ -11,6 +11,8 @@ Benefits:
 * control iTunes running on a remote computer 
 * let multiple people control one instance of iTunes over ssh
 
+ViTunes is pronounced vee-eye-tunes.
+
 ## Prerequisites
 
 * Ruby 1.8.6 or higher (developed on Ruby 1.9.2)
