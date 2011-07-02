@@ -62,18 +62,17 @@ function! ViTunes()
   setlocal buftype=nofile
   setlocal bufhidden=hide
   setlocal noswapfile
-  noremap <buffer> ,s :call <SID>openQueryWindow()<cr>
-  noremap <buffer> ,p :call <SID>openPlaylistDropdown()<cr>
-  noremap <buffer> ,a :call <SID>openArtistDropdown()<cr>
-  noremap <buffer> ,g :call <SID>openGenreDropdown()<cr>
-  noremap <buffer> ,A :call <SID>openAlbumDropdown()<cr>
-  noremap <buffer> ,c :call <SID>openAddToPlaylistDropDown()<cr>
+  noremap <buffer> <Leader>s :call <SID>openQueryWindow()<cr>
+  noremap <buffer> <Leader>p :call <SID>openPlaylistDropdown()<cr>
+  noremap <buffer> <Leader>a :call <SID>openArtistDropdown()<cr>
+  noremap <buffer> <Leader>g :call <SID>openGenreDropdown()<cr>
+  noremap <buffer> <Leader>A :call <SID>openAlbumDropdown()<cr>
+  noremap <buffer> <Leader>c :call <SID>openAddToPlaylistDropDown()<cr>
 
   noremap <buffer> > :call <SID>nextTrack()<cr>
   noremap <buffer> < :call <SID>prevTrack()<cr>
   noremap <buffer> >> :call <SID>itunesControl("nextTrack")<cr>
   noremap <buffer> << :call <SID>itunesControl("backTrack")<cr>
-  
   
   noremap <buffer> .  :call <SID>currentTrackAndPlaylist()<cr>
 
