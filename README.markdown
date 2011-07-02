@@ -98,7 +98,7 @@ line is blank, or try `ESC` then `q`.
 * `.` show current track and playlist, if any
 
 One thing to note: if you start playing a track that you've gotten to by going
-through the playlist dropdown, iTunes will play in continous mode, where the
+through the playlist dropdown, iTunes will play in continuous mode, where the
 next track in the playlist will automatically start playing after the current
 one ends.
 
