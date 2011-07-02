@@ -69,6 +69,14 @@ items update. This autocompletion is case-sensitive.
 `CTRL-p` and `CTRL-n` let you navigate the drop-down matches. Press `ENTER` to select
 one.
 
+More advanced autocompletion tips:
+
+* `CTRL-e` closes the match list and lets you continue typing
+* `CTRL-u`: when the match list is active, cycles forward through the match list and what you've typed so far; when the match list is inactive, erases what you've typed.
+* `CTRL-x C-u` reactivates autocompletion if it's gone away
+* `CTRL-y` selects the highlighted match without triggering ENTER
+* `ENTER` selects the highlighted match from the match list 
+
 Press `ENTER` or `ESC` to exit either search query or drop-down selection mode.
 
 ### Volume Control
