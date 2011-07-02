@@ -304,7 +304,7 @@ function! s:submitQueryOrSelection(command)
     let bcommand = s:vitunes_tool."predicate ".shellescape("album == '".query."'") 
   elseif a:command == 'addTracksToPlaylist'
     let trackIds = join(s:selectedTrackIds, ',')
-    let bcommand = s:vitunes_tool.a:command." ".trackIds." ".query 
+    let bcommand = s:vitunes_tool.a:command." ".trackIds." ".shellescape(query)
   else
     let bcommand = s:vitunes_tool . a:command . ' ' . shellescape(query)
   end
@@ -351,6 +351,7 @@ function! s:newPlaylist(name)
 endfunction
 
 nnoremap <silent> <leader>i :call ViTunes()<cr>
+nnoremap <silent> <leader>I :call ViTunes()<cr>:only<CR>
 
 
 let g:ViTunesLoaded = 1
