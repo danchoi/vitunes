@@ -130,7 +130,7 @@ function! s:playTrack()
   else
     let command = s:vitunes_tool . "playTrackID " . trackID
   endif
-  " echom command
+  "echom command
   call system(command)
   call s:currentTrackAndPlaylist()
 endfunc
@@ -225,17 +225,14 @@ function! s:commonDropDownConfig()
   normal $
 endfunction
 
-
 " Drop downs
-
 function! s:openPlaylistDropdown()
   leftabove split ChoosePlaylist
   inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('playlistTracks')<CR> 
   let s:selectionPrompt = s:selectPlaylistPrompt
-  call <SID>commonDropDownConfig()
+  call s:commonDropDownConfig()
   let s:selectionList = split(system(s:getPlaylistsCommand), '\n')
   if (s:lastPlaylist != '')
-    call insert(s:selectionList, s:lastPlaylist);
     call insert(s:selectionList, s:lastPlaylist);
   endif
   call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
@@ -245,7 +242,7 @@ function! s:openArtistDropdown()
   leftabove split ChoosePlaylist
   inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('artist')<CR> 
   let s:selectionPrompt = s:selectArtistPrompt
-  call <SID>commonDropDownConfig()
+  call s:commonDropDownConfig()
   let s:selectionList = split(system(s:getArtistsCommand), '\n')
   call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
 endfunction
