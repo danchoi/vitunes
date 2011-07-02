@@ -166,9 +166,7 @@ function! s:currentTrackAndPlaylist()
   let res1 = s:runCommand(s:vitunes_tool . "itunes currentTrack")
   " fix this on obj-c side later; we just need to make sure this doesn't 
   " spill over to another line.
-  let res1 = substitute(res1, 'Current track:', '','')
   let res2 = s:runCommand(s:vitunes_tool . "itunes currentPlaylist")
-  let res2 = substitute(res2, 'Current playlist: ', '','')
   echo res1[0:60] . ' | '.res2[0:30]
 endfunction
 
