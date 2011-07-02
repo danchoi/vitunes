@@ -201,7 +201,7 @@ function! GenericCompletion(findstart, base)
       " find tracks matching a:base
       for m in s:selectionList
         " why doesn't case insensitive flag work?
-        if m =~ '\c' . a:base 
+        if m =~ '^\c' . a:base 
           call add(res, m)
         endif
       endfor
