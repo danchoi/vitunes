@@ -73,7 +73,9 @@ one.
 More advanced autocompletion tips:
 
 * `CTRL-e` closes the match list and lets you continue typing
-* `CTRL-u`: when the match list is active, cycles forward through the match list and what you've typed so far; when the match list is inactive, erases what you've typed.
+* `CTRL-u`: when the match list is active, cycles forward through the match
+  list and what you've typed so far; when the match list is inactive, erases
+  what you've typed.
 * `CTRL-x CTRL-u` reactivates autocompletion if it's gone away
 * `CTRL-y` selects the highlighted match without triggering ENTER
 
@@ -95,6 +97,16 @@ line is blank, or try `ESC` then `q`.
 * `<<` previous track in iTunes current playlist
 * `.` show current track and playlist, if any
 
+One thing to note: if you start playing a track that you've gotten to through a
+playlist search, iTunes will play in continous mode, where the next track in
+the playlist will automatically start playing after the current one ends.
+
+But if you start playing a track you got to through search or some other path, 
+iTunes will stop playing after the current track ends.
+
+If you want use ViTunes to find and queue a bunch of track and have them play 
+in automatic succession, use the next feature...
+
 ### Copying tracks
 
 * `,c` copy track(s) to a playlist
@@ -102,6 +114,9 @@ line is blank, or try `ESC` then `q`.
 To copy tracks, put the cursor on a track or select a range of tracks,
 and then hit `,c` to select a playlist to copy them to. The tracks will be
 added to the end of the playlist.
+
+If this target playlist is already playing, you can keep queuing tracks to it
+and let the mix play out automatically.
 
 ## Bug reports and feature requests
 
