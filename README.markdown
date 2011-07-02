@@ -10,6 +10,7 @@ Benefits:
 * avoid using the mouse or trackpad; keystrokes get you there faster
 * control iTunes from another computer (via ssh session), across the room or across an ocean
 * let multiple people control one instance of iTunes over ssh
+* control iTunes from a Linux environment
 
 ViTunes is pronounced vee-eye-tunes.
 
