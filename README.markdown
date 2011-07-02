@@ -74,7 +74,7 @@ More advanced autocompletion tips:
 
 * `CTRL-e` closes the match list and lets you continue typing
 * `CTRL-u`: when the match list is active, cycles forward through the match list and what you've typed so far; when the match list is inactive, erases what you've typed.
-* `CTRL-x C-u` reactivates autocompletion if it's gone away
+* `CTRL-x CTRL-u` reactivates autocompletion if it's gone away
 * `CTRL-y` selects the highlighted match without triggering ENTER
 
 To exit the autocompletion or search query mode, press `ENTER` when the query
