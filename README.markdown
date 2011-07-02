@@ -8,7 +8,7 @@ Benefits:
 
 * control iTunes without leaving Vim, where the work happens
 * avoid using the mouse or trackpad; keystrokes get you there faster
-* control iTunes running on a remote computer 
+* control iTunes from another computer (via ssh session), across the room or across an ocean
 * let multiple people control one instance of iTunes over ssh
 
 ViTunes is pronounced vee-eye-tunes.
