@@ -9,3 +9,4 @@ build/
 *.mode2v3
 xcuserdata
 src/
+pkg/
