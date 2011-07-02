@@ -231,7 +231,7 @@ void newPlaylist(NSString *name) {
     return;
   }
   NSDictionary *props = [NSDictionary dictionaryWithObject:name forKey:@"name"];
-  iTunesPlaylist *playlist = [[[iTunes classForScriptingClass:@"playlist"] alloc] initWithProperties:props];
+  iTunesPlaylist *playlist = [[[iTunes classForScriptingClass:@"user playlist"] alloc] initWithProperties:props];
   [[library playlists] addObject:playlist]; 
   printf("Created new playlist: %s", [name cStringUsingEncoding:NSUTF8StringEncoding]);
 }
