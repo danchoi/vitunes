@@ -39,12 +39,16 @@ probably have a `PATH` issue. Try one of these workarounds:
 * Put the directory where Rubygems installs executables on your `PATH`
 * Try installing with `sudo gem install && vitunes-install`
 
+To upgrade ViTunes to a newer versoin, just repeat the installation produce.
 
 ## How to use it 
 
+For all the commands below, the mapleader is just assumed to be a `,`. If your
+mapleader is `\` or something else, use that instead.
+
 ### General commands
 
-* `,i` invoke or dismiss ViTunes (if not, it might be `\i` on your system)
+* `,i` invoke or dismiss ViTunes 
 * `?` show help and commands
 
 ### Navigation
