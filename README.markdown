@@ -86,9 +86,9 @@ added to the end of the playlist.
 
 ## How to contact the developer
 
-My name is Daniel Choi. I specialize in Ruby, Rails, MySQL, PostgreSQL, and
-iOS development. I am based in Cambridge, Massachusetts, USA, and my little
-software company is called Kaja Software. 
+My name is Daniel Choi. I specialize in Ruby, Rails, MySQL, PostgreSQL, and iOS
+development. I am based in Cambridge, Massachusetts, USA, and the little
+software company I run with Hoony Youn is called Kaja Software. 
 
 * Company Email: info@kajasoftware.com
 * Twitter: [@danchoi][twitter] 
