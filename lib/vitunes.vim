@@ -308,7 +308,9 @@ function! s:submitQueryOrSelection(command)
   echom bcommand
   let res = s:runCommand(bcommand)
   if a:command == 'addTracksToPlaylist'
-    let res = system(s:vitunes_tool.'playlistTracks '.shellescape(query))
+    redraw
+    echom "Added to playlist '".query."'"
+    return
   endif
   setlocal modifiable
   silent! 1,$delete
@@ -317,7 +319,7 @@ function! s:submitQueryOrSelection(command)
   setlocal nomodifiable
   " position cursor at 1st track
   normal 3G
-  if (a:command == 'playlistTracks' || a:command == 'addTracksToPlaylist')
+  if (a:command == 'playlistTracks') "  
     let s:currentPlaylist = query
     let s:lastPlaylist = query
   else
