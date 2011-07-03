@@ -274,7 +274,7 @@ function! s:openAddToPlaylistDropDown() range
   call <SID>commonDropDownConfig()
   let s:selectionList = split(system(s:getPlaylistsCommand), '\n')
   if (s:lastPlaylist != '')
-    call insert(s:selectionList, s:lastPlaylist);
+    call insert(s:selectionList, s:lastPlaylist)
   endif
   call feedkeys("a\<c-x>\<c-u>\<c-p>", 't')
 endfunction
