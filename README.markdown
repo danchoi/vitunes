@@ -47,6 +47,14 @@ Don't forget to run `vitunes-install` again after you download the new gem.
 For all the commands below, the mapleader is just assumed to be a `,`. If your
 mapleader is `\` or something else, use that instead.
 
+
+### Starting ViTunes
+
+You can run ViTunes in two ways:
+
+* within Vim with `,i` or `,I` 
+* from the command line with the `vitunes` command
+
 ### General commands
 
 * `,i` invoke or dismiss ViTunes 

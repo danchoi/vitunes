@@ -6,4 +6,5 @@ rescue LoadError
   require 'vitunes'
 end
 
-ViTunes.install_vim_plugin
+vimscript_file = File.join(File.dirname(__FILE__), '..', 'lib', 'vitunes.vim')
+exec("vim -S #{vimscript_file} -c ':call ViTunes()' -c ':only'")
