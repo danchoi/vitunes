@@ -222,6 +222,7 @@ function! s:commonDropDownConfig()
   noremap <buffer> q <Esc>:close<cr>
   inoremap <buffer> <Esc> <Esc>:close<cr>
   call setline(1, s:selectionPrompt)
+  inoremap <buffer> <Tab> <C-x><C-u>
   normal $
 endfunction
 
