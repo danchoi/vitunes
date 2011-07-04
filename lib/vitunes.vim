@@ -126,7 +126,7 @@ function! s:playTrack()
   endif
   let command = ""
   if (s:currentPlaylist != '')
-    let command = s:vitunes_tool . "playTrackIDFromPlaylist ".trackID.' '.s:currentPlaylist
+    let command = s:vitunes_tool . "playTrackIDFromPlaylist ".trackID.' '.shellescape(s:currentPlaylist)
   else
     let command = s:vitunes_tool . "playTrackID " . trackID
   endif
