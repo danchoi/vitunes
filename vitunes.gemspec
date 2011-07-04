@@ -21,6 +21,6 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.post_install_message = "Now please run vitunes-install to install the Vim plugin"
+  s.post_install_message = "\n*** Now please run vitunes-install to install the Vim plugin ***\n"
 end
 
