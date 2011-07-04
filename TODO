@@ -1,0 +1,4 @@
+TODO 
+- for true ssh integration, allow user to specify vitunes command as a
+  ssh user@host '/path/to/vitunes-objc' 
+
