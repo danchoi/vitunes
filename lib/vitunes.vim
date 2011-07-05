@@ -345,7 +345,6 @@ endfunction
 
 function! s:newPlaylist(name)
   let command = s:vitunes_tool.'newPlaylist '.shellescape(a:name)
-  echom command
   let res = system(s:vitunes_tool.'newPlaylist '.shellescape(a:name))
   echom res
 endfunction
