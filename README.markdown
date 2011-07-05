@@ -132,7 +132,14 @@ and let the mix play out automatically.
 
 ### Managing playlists
 
-* `:NewPlaylist [new-playlist-name]` creates a new playlist
+* `:NewPlaylist [new playlist name]` creates a new playlist
+
+### Buy more music, support the ViTunes project
+
+* `,z` opens Amazon's MP3 Store in your web browser 
+
+At no additional cost to you, Amazon will give the ViTunes developer a small
+referral bonus (around 6%) when you buy MP3s via `,z`. 
 
 
 ## Bug reports and feature requests

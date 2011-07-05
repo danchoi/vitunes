@@ -27,6 +27,8 @@ let s:currentPlaylist = ''
 let s:lastPlaylist = ''
 let s:selectedTrackIds = []
 
+let s:musicStoreURL = "http://www.amazon.com/gp/redirect.html?ie=UTF8&location=http%3A%2F%2Fwww.amazon.com%2FMP3-Music-Download%2Fb%3Fie%3DUTF8%26node%3D163856011%26ref_%3Dtopnav_storetab_dmusic%23&tag=instantwatche-20&linkCode=ur2&camp=1789&creative=390957"
+
 func! s:trimString(string)
   let string = substitute(a:string, '\s\+$', '', '')
   return substitute(string, '^\s\+', '', '')
@@ -85,12 +87,14 @@ function! ViTunes()
   " noremap <buffer> <BS> :call <SID>deleteTracksFromPlaylist()<CR> "
   noremap <buffer> <Leader>i :close<CR>
   noremap <buffer> ? :call <SID>help()<CR>
-  "noremap <buffer> <cr> <Esc>:call <SID>playTrack()<cr>
+  noremap <buffer> <Leader>z :call <SID>musicStore()<CR>
+  
   noremap <buffer> <cr> :call <SID>playTrack()<cr>
   setlocal nomodifiable
   setlocal statusline=%!ViTunesStatusLine()
 
   command! -buffer -bar -nargs=1 NewPlaylist call s:newPlaylist(<f-args>)
+  command! -buffer -bar -nargs=0 NewPlaylist call s:newPlaylist(<f-args>)
 
   if line('$') == 1 " buffer empty
     let msg = "Welcome to ViTunes\n\nPress ? for help"
@@ -348,6 +352,10 @@ function! s:newPlaylist(name)
   let res = system(s:vitunes_tool.'newPlaylist '.shellescape(a:name))
   echom res
 endfunction
+
+function! s:musicStore()
+  call system("open ".shellescape(s:musicStoreURL))
+endfunc
 
 nnoremap <silent> <leader>i :call ViTunes()<cr>
 nnoremap <silent> <leader>I :call ViTunes()<cr>:only<CR>
