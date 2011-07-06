@@ -244,7 +244,7 @@ function! s:openPlaylistDropdown()
 endfunction
 
 function! s:openArtistDropdown()
-  leftabove split ChoosePlaylist
+  leftabove split ChooseArtist
   inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('artist')<CR> 
   let s:selectionPrompt = s:selectArtistPrompt
   call s:commonDropDownConfig()
@@ -253,7 +253,7 @@ function! s:openArtistDropdown()
 endfunction
 
 function! s:openGenreDropdown()
-  leftabove split ChoosePlaylist
+  leftabove split ChooseGenre
   inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('genre')<CR> 
   let s:selectionPrompt = s:selectGenrePrompt
   call <SID>commonDropDownConfig()
@@ -262,7 +262,7 @@ function! s:openGenreDropdown()
 endfunction
 
 function! s:openAlbumDropdown()
-  leftabove split ChoosePlaylist
+  leftabove split ChooseAlbum
   inoremap <silent> <buffer> <cr> <Esc>:call <SID>submitQueryOrSelection('album')<CR> 
   let s:selectionPrompt = s:selectAlbumPrompt
   call <SID>commonDropDownConfig()
