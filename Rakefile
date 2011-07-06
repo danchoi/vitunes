@@ -38,6 +38,7 @@ end
 desc "build webpage"
 task :build_webpage do
   `cp README.markdown ../project-webpages/src/vitunes.README.markdown`
+  `cp coverage.markdown ../project-webpages/src/vitunes.coverage.markdown`
   Dir.chdir "../project-webpages" do
     puts `ruby gen.rb vitunes #{ViTunes::VERSION}`
     `open out/vitunes.html`
