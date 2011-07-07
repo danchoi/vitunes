@@ -11,7 +11,7 @@ Benefits:
 * minimalist text-based UI works better on smaller screens than a honkin multi-paned GUI
 * control iTunes from another computer (via ssh session), across the room or across the world
 * let multiple people control one instance of iTunes over ssh ([how][multi]) 
-* control iTunes from a GNU/Linux client (I do this)
+* control iTunes from a GNU/Linux client (I do!)
 
 [multi]:https://github.com/danchoi/vitunes/wiki
 
@@ -88,7 +88,7 @@ More advanced autocompletion tips:
 * `CTRL-u`: when the match list is active, cycles forward through the match
   list and what you've typed so far; when the match list is inactive, erases
   what you've typed.
-* `CTRL-x CTRL-u` reactivates autocompletion if it's gone away
+* both `TAB` and `CTRL-x CTRL-u` reactivates autocompletion if it's gone away
 * `CTRL-y` selects the highlighted match without triggering ENTER
 
 To exit the autocompletion or search query mode, press `ENTER` when the query
