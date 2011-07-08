@@ -133,6 +133,7 @@ and let the mix play out automatically.
 
 ### Managing playlists
 
+* `,P` goes to the current playlist, if there is one
 * `:NewPlaylist [new playlist name]` creates a new playlist
 
 ### Buy more music, support the ViTunes project

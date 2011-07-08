@@ -70,6 +70,7 @@ function! ViTunes()
   noremap <buffer> <Leader>g :call <SID>openGenreDropdown()<cr>
   noremap <buffer> <Leader>A :call <SID>openAlbumDropdown()<cr>
   noremap <buffer> <Leader>c :call <SID>openAddToPlaylistDropDown()<cr>
+  noremap <buffer> <Leader>P :call <SID>gotoCurrentPlaylist()<cr>
 
   noremap <buffer> > :call <SID>nextTrack()<cr>
   noremap <buffer> < :call <SID>prevTrack()<cr>
@@ -290,7 +291,6 @@ function! s:submitQueryOrSelection(command)
     close
     return
   endif
-
   let query = getline('.')[len(s:selectionPrompt):] " get(split(getline('.'), ':\s*'), 1)
   close
   " echom query
@@ -351,6 +351,22 @@ function! s:newPlaylist(name)
   let command = s:vitunes_tool.'newPlaylist '.shellescape(a:name)
   let res = system(s:vitunes_tool.'newPlaylist '.shellescape(a:name))
   echom res
+endfunction
+
+function! s:gotoCurrentPlaylist()
+  let playlist = s:runCommand(s:vitunes_tool . "itunes currentPlaylist")
+  if playlist != ''
+    let bcommand = s:vitunes_tool.'playlistTracks '.shellescape(playlist)
+    let res = s:runCommand(bcommand)
+    setlocal modifiable
+    silent! 1,$delete
+    silent! put =res
+    silent! 1delete
+    setlocal nomodifiable
+    normal 3G
+    let s:currentPlaylist = playlist
+    let s:lastPlaylist = playlist
+  endif
 endfunction
 
 function! s:musicStore()
