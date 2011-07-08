@@ -94,8 +94,7 @@ function! ViTunes()
   setlocal nomodifiable
   setlocal statusline=%!ViTunesStatusLine()
 
-  command! -buffer -bar -nargs=1 NewPlaylist call s:newPlaylist(<f-args>)
-  command! -buffer -bar -nargs=0 NewPlaylist call s:newPlaylist(<f-args>)
+  command! -buffer -bar -nargs=1 NewPlaylist call <SID>newPlaylist(<f-args>)
 
   if line('$') == 1 " buffer empty
     let msg = "Welcome to ViTunes\n\nPress ? for help"
