@@ -8,7 +8,7 @@ Benefits:
 
 * control iTunes without leaving Vim, where one is probably in a state of productive bliss
 * avoid using the mouse or trackpad; keystrokes get you there faster
-* Zen-minimalist text-based UI works better on small screens than iTunes' massively multi-paned, chrome-trimmed GUI
+* Zen-minimalist text-based UI works better on small screens than iTunes' massively multi-paned, chrome-padded GUI
 * control iTunes from another computer (via ssh session), across the room or across the world
 * let multiple people control one instance of iTunes over ssh ([how][multi]) 
 * control iTunes from a GNU/Linux client (I do!)
