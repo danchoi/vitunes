@@ -46,7 +46,8 @@ NSString *formatTrackForDisplay(iTunesTrack *track) {
   NSString *artist = [track.artist stringByPaddingToLength:ARTIST_COL withString:@" " startingAtIndex:0];
   NSString *name = [track.name stringByPaddingToLength:TRACK_NAME_COL withString:@" " startingAtIndex:0];
   NSString *genre = [track.genre stringByPaddingToLength:GENRE_COL withString:@" " startingAtIndex:0];
-  NSString *time = [track.time stringByPaddingToLength:TIME_COL withString:@" " startingAtIndex:0];
+  NSString *timeValue = track.time != nil ? track.time : @" ";
+  NSString *time = [timeValue stringByPaddingToLength:TIME_COL withString:@" " startingAtIndex:0];
   NSString *kind = [track.kind stringByPaddingToLength:KIND_COL withString:@" " startingAtIndex:0];
   NSString *year;
   if (track.year != 0) {
