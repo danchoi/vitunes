@@ -27,11 +27,7 @@ If you're looking for `vitunes` for MPlayer by Ryan Flannery, click [here](http:
 
 ## Install
 
-    gem install vitunes
-
-Then
-
-    vitunes-install
+    gem install vitunes && vitunes-install
 
 `vitunes-install` installs a Vim plugin into your ~/.vim/plugin
 directory. 
@@ -43,7 +39,6 @@ probably have a `PATH` issue. Try one of these workarounds:
 * Try installing with `sudo gem install vitunes && vitunes-install`
 
 To upgrade ViTunes to a newer version, just repeat the installation procedure.
-Don't forget to run `vitunes-install` again after you download the new gem.
 
 ## How to use it 
 
