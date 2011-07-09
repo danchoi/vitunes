@@ -17,6 +17,8 @@ Benefits:
 
 ViTunes is pronounced vee-eye-tunes.
 
+If you're looking for `vitunes` for MPlayer by Ryan Flannery, click [here](http://freshmeat.net/projects/vitunes).
+
 ## Prerequisites
 
 * Ruby 1.8.6 or higher (developed on Ruby 1.9.2)
