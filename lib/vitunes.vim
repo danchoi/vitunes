@@ -52,7 +52,7 @@ function! s:runCommand(command)
 endfunction
 
 function! ViTunesStatusLine()
-  return "%<%f\ Press ? for help. "."%r%=%-14.(%l,%c%V%)\ %P"
+  return "%<%f\ Press ".g:mapleader."? for help. "."%r%=%-14.(%l,%c%V%)\ %P"
 endfunction
 
 " the main window
@@ -87,7 +87,7 @@ function! ViTunes()
   " Not working yet
   " noremap <buffer> <BS> :call <SID>deleteTracksFromPlaylist()<CR> "
   noremap <buffer> <Leader>i :close<CR>
-  noremap <buffer> ? :call <SID>help()<CR>
+  noremap <buffer> <Leader>? :call <SID>help()<CR>
   noremap <buffer> <Leader>z :call <SID>musicStore()<CR>
   
   noremap <buffer> <cr> :call <SID>playTrack()<cr>

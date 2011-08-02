@@ -58,7 +58,7 @@ You can run ViTunes in two ways:
 
 * `,i` invoke or dismiss ViTunes 
 * `,I` invoke ViTunes and go full screen with it
-* `?` show help and commands
+* `,?` show help and commands
 
 `,I` is useful if you want to launch immediately into ViTunes after starting Vim.
 
