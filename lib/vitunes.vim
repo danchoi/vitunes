@@ -11,6 +11,9 @@ else
   let s:vitunes_tool = '/Users/choi/projects/vitunes/build/Release/vitunes '
   " Maybe I should make this a relative path
 endif
+if !exists("g:mapleader")
+  let g:mapleader = ","
+endif
 
 let s:searchPrompt = "Search iTunes Music Library: "
 let s:getPlaylistsCommand = s:vitunes_tool . "playlists"
