@@ -11,7 +11,7 @@ Benefits:
 * Zen-minimalist text-based UI works better on small screens than iTunes' multi-paned, chrome-padded GUI
 * control iTunes from another computer (via ssh session), across the room or across the world
 * let multiple people control one instance of iTunes over ssh ([how][multi]) 
-* control iTunes from a GNU/Linux client (I do!)
+* control iTunes from GNU/Linux computers (I control my iTunes from two Linux netbooks)
 
 [multi]:https://github.com/danchoi/vitunes/wiki
 
