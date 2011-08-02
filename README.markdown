@@ -8,7 +8,7 @@ Benefits:
 
 * control iTunes without leaving Vim, where one is probably in a state of productive bliss
 * avoid using the mouse or trackpad; keystrokes get you there faster
-* Zen-minimalist text-based UI works better on small screens than iTunes' massively multi-paned, chrome-padded GUI
+* Zen-minimalist text-based UI works better on small screens than iTunes' multi-paned, chrome-padded GUI
 * control iTunes from another computer (via ssh session), across the room or across the world
 * let multiple people control one instance of iTunes over ssh ([how][multi]) 
 * control iTunes from a GNU/Linux client (I do!)
@@ -29,8 +29,9 @@ If you're looking for `vitunes` for MPlayer by Ryan Flannery, click [here](http:
 
     gem install vitunes && vitunes-install
 
-`vitunes-install` installs a Vim plugin into your ~/.vim/plugin
-directory. 
+`vitunes-install` installs a Vim plugin into your ~/.vim/plugin directory.  If
+you don't want to install the Vim plugin and just want to run `vitunes` as a
+stand-alone program, just run `gem install vitunes` and skip `vitunes-install`.
 
 If you get an error message saying that vitunes-install is missing, then you
 probably have a `PATH` issue. Try one of these workarounds:
@@ -132,6 +133,14 @@ and let the mix play out automatically.
 
 * `,P` goes to the current playlist, if there is one
 * `:NewPlaylist [new playlist name]` creates a new playlist
+
+### Tips
+
+If you want to see your entire library in a Vim buffer, load the `Library`
+playlist. If might take a few seconds to load your entire iTunes library, but
+once it's loaded you'll be able to page through it at blazing speed and play
+any tracks you want. The list will be sorted by artist.
+
 
 ### Buy more music, support the ViTunes project
 
