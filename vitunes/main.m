@@ -254,8 +254,9 @@ int main (int argc, const char * argv[]) {
     args = [rawArgs subarrayWithRange:aRange];
   }
   iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
-  library = [[iTunes sources] objectWithName:@"Library"];
-  libraryPlaylist = [[library playlists] objectWithName:@"Library"];
+  library = [[iTunes sources] objectAtIndex:0];
+  libraryPlaylist = [[library playlists] objectAtIndex:0];
+
 
   if ([action isEqual: @"search"]) {
     printTracks(search(args));
