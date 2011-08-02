@@ -97,7 +97,7 @@ function! ViTunes()
   command! -buffer -bar -nargs=1 NewPlaylist call <SID>newPlaylist(<f-args>)
 
   if line('$') == 1 " buffer empty
-    let msg = "Welcome to ViTunes\n\nPress ? for help"
+    let msg = "Welcome to ViTunes\n\nPress ".g:mapleader."? for help"
     setlocal modifiable
     silent! 1,$delete
     silent! put =msg
