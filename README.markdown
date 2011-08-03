@@ -151,7 +151,7 @@ move around the apartment.
 * `,z` opens Amazon's MP3 Store in your web browser 
 
 At no additional cost to you, Amazon will give the ViTunes developer a small
-referral bonus (around 6%) when you buy MP3s via `,z`. 
+referral bonus (around 6%) when you buy MP3s via `,z`.  Thank you for your support!
 
 
 ## Bug reports and feature requests
