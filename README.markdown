@@ -153,7 +153,7 @@ move around the apartment.
 ### History and future
 
 I've been interested in designing alternative user interfaces to iTunes since
-2008, when I was working out of the hacker cooperative [Betahouse](http://betahouse.org/).  
+2008, when I was working out of the creative hacker cooperative [Betahouse](http://betahouse.org/).  
 
 * My first experiment was [itunes-rails](http://code.google.com/p/itunes-rails/). 
 * My second experiment was [itunes-command](http://danielchoi.com/software/itunes-command.html).
