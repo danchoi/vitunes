@@ -11,7 +11,7 @@ Benefits:
 * Zen-minimalist textual UI works better on small screens than iTunes' complicated, multi-paned GUI
 * Control iTunes from another computer over ssh, across the room or across the world
 * Let multiple people control one instance of iTunes over ssh ([how][multi]) 
-* Control iTunes from GNU/Linux computers over ssh (I control the iTunes on my Mac Mini from two Linux Asus netbooks that I move around the apartment)
+* Control iTunes from a GNU/Linux client computer over ssh 
 
 [multi]:https://github.com/danchoi/vitunes/wiki
 
@@ -140,6 +140,10 @@ If you want to see your entire library in a Vim buffer, load the `Library`
 playlist. If might take a few seconds to load your entire iTunes library, but
 once it's loaded you'll be able to page through it at blazing speed and play
 any tracks you want. The list will be sorted by artist.
+
+If you have cheap Linux netbooks, they make good ViTunes controllers.  I
+control the iTunes on my Mac Mini from two Linux Asus 1015PEM netbooks that I
+move around the apartment.
 
 
 ### Buy more music, support the ViTunes project
