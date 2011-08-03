@@ -160,7 +160,7 @@ I've been interested in designing alternative user interfaces to iTunes since
 * ViTunes is the third experiment.
 
 If you run a coffeeshop or coworking space where you'd like to let people use a
-common iTunes library like a jukebox, please let me know, because I'm
+common iTunes library like a jukebox, **please let me know**, because I'm
 interested in making something convenient for this kind of environment.  This
 will probably require interaction via mobile devices.
 
