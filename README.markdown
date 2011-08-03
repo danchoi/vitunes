@@ -150,7 +150,7 @@ If you have cheap Linux netbooks, they make good ViTunes controllers.  I
 control the iTunes on my Mac Mini from two Linux Asus 1015PEM netbooks that I
 move around the apartment.
 
-### History
+### History and future
 
 I've been interested in designing alternative user interfaces to iTunes since
 2008, when I was working out of the hacker cooperative [Betahouse](http://betahouse.org/).  
@@ -158,6 +158,11 @@ I've been interested in designing alternative user interfaces to iTunes since
 * My first experiment was [itunes-rails](http://code.google.com/p/itunes-rails/). 
 * My second experiment was [itunes-command](http://danielchoi.com/software/itunes-command.html).
 * ViTunes is the third experiment.
+
+If you run a coffeeshop or coworking space where you'd like to let people use a
+common iTunes library like a jukebox, please let me know, because I'm
+interested in making something convenient for this kind of environment.  This
+will probably require interaction via mobile devices.
 
 ### Buy more music, support the ViTunes project
 
