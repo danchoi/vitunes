@@ -137,7 +137,7 @@ and let the mix play out automatically.
 ### Tips
 
 If you want to see your entire library in a Vim buffer, load the `Library`
-playlist. If might take a few seconds to load your entire iTunes library, but
+playlist. It may take a few seconds to load your entire iTunes library. But
 once it's loaded you'll be able to page through it at blazing speed and play
 any tracks you want. The list will be sorted by artist.
 
