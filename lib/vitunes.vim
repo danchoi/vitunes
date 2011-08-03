@@ -8,7 +8,7 @@ if exists("g:vitunes_tool")
   let s:vitunes_tool = g:vitunes_tool
 else
   " This is the development version (specific to D Choi's setup)
-  let s:vitunes_tool = '/Users/choi/projects/vitunes/build/Release/vitunes '
+  let s:vitunes_tool = 'dev/vitunes '
   " Maybe I should make this a relative path
 endif
 if !exists("g:mapleader")
@@ -73,6 +73,7 @@ function! ViTunes()
   noremap <buffer> <Leader>g :call <SID>openGenreDropdown()<cr>
   noremap <buffer> <Leader>A :call <SID>openAlbumDropdown()<cr>
   noremap <buffer> <Leader>c :call <SID>openAddToPlaylistDropDown()<cr>
+  noremap <buffer> <BS> :call <SID>deleteTracksFromPlaylist()<CR> "
   noremap <buffer> <Leader>P :call <SID>gotoCurrentPlaylist()<cr>
 
   noremap <buffer> > :call <SID>nextTrack()<cr>
@@ -87,8 +88,6 @@ function! ViTunes()
   noremap <buffer> +  :call <SID>changeVolume("volumeUp")<cr>
   noremap <buffer> =  :call <SID>changeVolume("volumeUp")<cr>
 
-  " Not working yet
-  " noremap <buffer> <BS> :call <SID>deleteTracksFromPlaylist()<CR> "
   noremap <buffer> <Leader>i :close<CR>
   noremap <buffer> <Leader>? :call <SID>help()<CR>
   noremap <buffer> <Leader>z :call <SID>musicStore()<CR>
@@ -334,20 +333,19 @@ function! s:submitQueryOrSelection(command)
   endif
 endfunction
 
-" TODO does not work yet
-function! s:deleteTracksFromPlaylist() range
-  if (s:currentPlaylist == '')
-    echom "You can't delete tracks unless you're in a playlist"
-    return
-  endif
+function! s:deleteTracksFromPlaylist() range 
   let s:selectedTrackIds = s:collectTrackIds(a:firstline, a:lastline)
   let trackIds = join(s:selectedTrackIds, ',')
-  let bcommand = s:vitunes_tool.'rmTracksFromPlaylist '.trackIds." ".s:currentPlaylist 
+  let playlist = s:lastPlaylist
+  let bcommand = s:vitunes_tool."deleteTracksFromPlaylist ".trackIds." ".shellescape(playlist)
+  let res = s:runCommand(bcommand)
+  setlocal modifiable
+  exec "silent! ".a:firstline.",".a:lastline."delete"
+  redraw
+  setlocal nomodifiable
   echom bcommand
-  let res = system(bcommand)
-  " delete lines from buffer
-  echom res
-endfunction
+  return
+endfunc
 
 function! s:newPlaylist(name)
   let command = s:vitunes_tool.'newPlaylist '.shellescape(a:name)

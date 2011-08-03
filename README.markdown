@@ -118,9 +118,10 @@ query), iTunes will stop playing after that track ends.
 If you want to use ViTunes to find and queue a bunch of tracks and have them play 
 in automatic succession, use the next feature...
 
-### Copying tracks
+### Copying and deleting tracks
 
 * `,c` copy track(s) to a playlist
+* `BACKSPACE` deletes track(s) from the playlist
 
 To copy tracks, put the cursor on a track or select a range of tracks,
 and then hit `,c` to select a playlist to copy them to. The tracks will be
@@ -128,6 +129,11 @@ added to the end of the playlist.
 
 If this target playlist is already playing, you can keep queuing tracks to it
 and let the mix play out automatically.
+
+To delete tracks from the currently displayed playlist, put the cursor on a
+track or select a range of tracks, and then hit `BACKSPACE` (the Apple delete
+key) to remove them from the playlist that you are looking at. 
+
 
 ### Managing playlists
 

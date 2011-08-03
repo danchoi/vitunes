@@ -119,18 +119,16 @@ void addTracksToPlaylistName(NSString *trackIds, NSString *playlistName) {
   }
 }
 
-// TODO This doesn't seem to work
-void rmTracksFromPlaylistName(NSString *trackIds, NSString *playlistName) {
+void deleteTracksFromPlaylistName(NSString *trackIds, NSString *playlistName) {
   iTunesPlaylist *playlist =  [[library playlists] objectWithName:playlistName];
-
   for (NSString *trackID in [trackIds componentsSeparatedByString:@","]) {
-    iTunesTrack* t = findTrackID(trackID);
+    NSNumber *databaseId = convertNSStringToNumber(trackID);
+    NSArray *xs = [[playlist tracks] filteredArrayUsingPredicate: [NSPredicate predicateWithFormat:@"databaseID == %@", databaseId]];
+    iTunesTrack* t = [xs objectAtIndex:0];
     NSLog(@"Removing track: %@ from playlist: %@", [t name], [playlist name]);
-    [[playlist tracks] removeObject:t];
+    [t delete];
   }
-
 }
-
 
 void groupTracksBy(NSString *property) {
   // gets list of all e.g. artists, genres
@@ -275,8 +273,11 @@ int main (int argc, const char * argv[]) {
   } else if ([action isEqual: @"playPlaylist"]) {
     playPlaylist([args objectAtIndex:0]);
   } else if ([action isEqual: @"addTracksToPlaylist"]) { 
-    // make sure to quote args
+    // make sure to quote first arg
     addTracksToPlaylistName([args objectAtIndex:0], [args objectAtIndex:1]);
+  } else if ([action isEqual: @"deleteTracksFromPlaylist"]) { 
+    // make sure to quote first arg
+    deleteTracksFromPlaylistName([args objectAtIndex:0], [args objectAtIndex:1]);
   } else if ([action isEqual: @"volumeUp"]) {
     turnVolume(@"up");
   } else if ([action isEqual: @"volumeDown"]) {
