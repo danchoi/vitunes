@@ -134,7 +134,6 @@ To delete tracks from a playlist, put the cursor on a track or select a range
 of tracks, and then hit `BACKSPACE` (the Apple delete key) to remove them from
 the playlist that you are looking at. 
 
-
 ### Managing playlists
 
 * `,P` goes to the current playlist, if there is one
@@ -151,6 +150,14 @@ If you have cheap Linux netbooks, they make good ViTunes controllers.  I
 control the iTunes on my Mac Mini from two Linux Asus 1015PEM netbooks that I
 move around the apartment.
 
+### History
+
+I've been interested in designing alternative user interfaces to iTunes since
+2008, when I was working out of the hacker cooperative [Betahouse](http://betahouse.org/).  
+
+* My first experiment was [itunes-rails](http://code.google.com/p/itunes-rails/). 
+* My second experiment was [itunes-command](http://danielchoi.com/software/itunes-command.html).
+* ViTunes is the third experiment.
 
 ### Buy more music, support the ViTunes project
 
