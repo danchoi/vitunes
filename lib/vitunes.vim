@@ -298,8 +298,8 @@ function! s:submitQueryOrSelection(command)
   if (len(query) == 0 || query =~ '^\s*$')
     return
   endif
+  let query = substitute(query, "'", "\\\\'", '')
   if a:command == 'artist'
-    let query = substitute(query, "'", "\'", '')
     let bcommand = s:vitunes_tool."predicate ".shellescape("artist == '".query."'")
   elseif a:command == 'genre'
     let bcommand = s:vitunes_tool."predicate ".shellescape("genre == '".query."'") 
